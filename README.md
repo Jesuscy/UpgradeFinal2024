@@ -8,3 +8,5 @@ El objetivo del proyecto es que los integrantes de equipos de trabajo puedan ten
 
 De esta manera podemos centralizar la comunicación de un equipo de trabajo en una sola sala y organizar eficientemente los contenidos.
 
+Integrantes: Jaime Yague Matias, Sergio Reportella, Luis Rojas Lugo, Jesús Carrasco Yelo.
+
