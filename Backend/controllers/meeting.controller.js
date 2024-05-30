@@ -46,9 +46,8 @@ const getMeeting = async (req, res, next) => {
         }
     }
 
-    }
      //Crear Meeting
-     const createMeeting = async (req, res, next) => {
+    const createMeeting = async (req, res, next) => {
         try {
             const { name, path, roles, users } = req.body
             const existingMeeting = await Meeting.find({ meetingName: name })
@@ -219,4 +218,4 @@ const getMeeting = async (req, res, next) => {
         }
     }
 
-    module.exports = {getMeeting, getMeetings, getUserMeetings, getMeetingUsers, addUserMeeting , delUserMeeting }
+    module.exports = {getMeeting, getMeetings, createMeeting, deleteMeeting, editMeeting, getUserMeetings, getMeetingUsers, addUserMeeting , delUserMeeting }
