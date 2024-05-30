@@ -46,6 +46,86 @@ const getMeeting = async (req, res, next) => {
         }
     }
 
+    }
+     //Crear Meeting
+     const createMeeting = async (req, res, next) => {
+        try {
+            const { name, path, roles, users } = req.body
+            const existingMeeting = await Meeting.find({ meetingName: name })
+            if (existingMeeting) {
+                return res.status(400).json({
+                    status: 400,
+                    message: "Meeting name already registered"
+                })
+            }
+            const meeting = new Meeting({
+                meetingName: name,
+                //meetingPath:
+                meetingRoles: roles,
+                meetingUser: users
+            })
+            meeting.save()
+            res.status(201).json({
+                status: 201,
+                message: "Meeting successfully created",
+                meeting: meeting
+            })
+        }
+        catch (error) {
+            next(error)
+            res.status(500).json({
+                status: 500,
+                message: "Internal server error"
+            })
+        }
+    }
+
+
+    //Borrar meeting
+    const deleteMeeting = async (req, res, next) => {
+        try {
+            const meetingId = req.body
+
+            const deletedMeeting = await Meeting.findByIdAndDelete(meetingId);
+
+            if (deletedMeeting) {
+                res.status(200).json({
+                    status: 200,
+                    message: "Meeting successfully deleted"
+                })
+            } else {
+                res.status(404).json({
+                    status: 404,
+                    message: "Meeting not found"
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                error: error.message
+            })
+        }
+    }
+
+    //Editar Meeting
+    const editMeeting = async (req, res, next) => {
+        try {
+            const id = req.params.id
+            const editMeeting = new Meeting(req.body)
+            editMeeting._id = id
+            const updatedMeeting = await Meeting.findByIdAndUpdate(id, editMeeting)
+            if (!updatedMeeting) {
+                return res.status(404).json({ message: 'Meeting id not found' })
+            }
+            return res.status(200).json({ updatedMeeting })
+        }
+        catch (error) {
+            return res.status(500).json(error);
+
+        }
+    }
+
         //Obtener meetings del user
     const getUserMeetings = async (req, res, next) => {
         try {
