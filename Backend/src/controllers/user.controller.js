@@ -102,4 +102,46 @@ const deleteUser = async (req, res, next) => {
     res.status(200).json({ message: "User succesfully deleted" })
 }
 
-module.exports = { getUser, getUsers, createUser }
+
+
+const logUser = async (req, res, next) => {
+    try {
+        //Obtengo Mail y Password 
+        const {mail, password} = req.body
+        //Busco user en BD 
+        const user = await User.findOne({ username: mail })
+
+        if (!user) {
+            return res.status(401).json({
+                status: 401,
+                message: "User not found"
+            })
+        }
+        //Comparo la password con la de la BD
+        const passwordMatch = bcrypt.compare(password, user.password)
+
+        if (!passwordMatch) {
+            console.log('Mail o password incorrecta.')
+        }
+        //Genero el token y lo devuelvo en el json al forntend.
+        const token = jwt.sign({ email: user.email }, 'secretKey', { expiresIn: '1h' });
+
+        //Devulevo el user.
+        res.status(201).json({
+            status: 201,
+            message: HTTPSTATUSCODE[201],
+            user: user,
+            token: token
+        })
+    }
+    catch (error) {
+        next(error)
+        res.status(500).json({
+            status: 500,
+            message: "Internal server error"
+        })
+    }
+}
+
+
+module.exports = { getUser, getUsers, createUser, deleteUser, logUser }
