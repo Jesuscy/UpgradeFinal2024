@@ -143,5 +143,15 @@ const logUser = async (req, res, next) => {
     }
 }
 
+const logoutUser = (req, res, next) => {
+    // Aquí podrías realizar cualquier limpieza necesaria
+    // No hay mucho que hacer en el backend para el logout si no se manejan tokens en el lado del servidor
 
-module.exports = { getUser, getUsers, createUser, deleteUser, logUser }
+    res.status(200).json({
+        status: 200,
+        message: "Logout successful"
+    });
+};
+
+
+module.exports = { getUser, getUsers, createUser, deleteUser, logUser,logoutUser }
