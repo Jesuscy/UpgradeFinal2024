@@ -4,8 +4,8 @@ const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 //Obtener Meeting
 const getMeeting = async (req, res, next) => {
     try {
-        const meetingName = req.body
-        const meeting = await Meeting.findOne({ meetingName: meetingName })
+        const meetingId = req.body
+        const meeting = await Meeting.findById(meetingId)
         if (meeting) {
             res.status(200).json({
                 status: 200,
