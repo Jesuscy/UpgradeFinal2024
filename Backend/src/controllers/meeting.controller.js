@@ -1,6 +1,8 @@
 const Meeting = require('../models/meeting.model')
+const meetingRouter = require('../routes/meeting.router')
 const HTTPSTATUSCODE = require('../utils/httpStatusCode')
-
+const mongoose = require('mongoose')
+const {createMeetingUser,deleteMeetingUser,updateMeetingUser} = require('./meetingUser.controller')
 //Obtener Meeting
 const getMeeting = async (req, res, next) => {
     try {
@@ -151,23 +153,32 @@ const getUserMeetings = async (req, res, next) => {
 //Añadir user al meeting.
 const addUserMeeting = async (req, res, next) => {
     try {
-        const { meetingId, userId, roles } = req.body;
+        const { meetingId, userId, roles } = req.body
 
-        const meetingToMod = await Meeting.findById(meetingId);
+        const meetingToMod = await Meeting.findById(meetingId)
         if (!meetingToMod) {
-            return res.status(404).json({ message: 'Meeting id not found' });
+            return res.status(404).json({ message: 'Meeting id not found' })
         }
-
-        const userExists = meetingToMod.meetingUsers.some(user => user.userId.toString() === userId);
-        if (!userExists) {
-            meetingToMod.meetingUsers.push({ userId, roles });
+        const userExists = meetingToMod.meetingUsers.some(user => user.userId.toString() !== userId)
+        
+        if (userExists) {
+            return res.status(400).json({ message: 'User already in the meeting' })
         }
-
+        //Creo Objeto con la estructura de meetingUser y lo sumo al array
+       // const objectMeetingId = mongoose.Types.ObjectId(meetingId)
+        //const objectUserId = mongoose.Types.ObjectId(userId)
+        console.log(typeof objectMeetingId ,typeof objectUserId , typeof roles)
+        /*const newMeetingUserOrError = await createMeetingUser(meetingId, userId, roles)
+        if (typeof newMeetingUserOrError === 'string') {
+            return res.status(500).json({ message: newMeetingUserOrError })
+        }
+        // Si newMeetingUserOrError es un objeto MeetingUser, lo agregamos al array
+        meetingToMod.meetingUsers.push(newMeetingUserOrError);
         await meetingToMod.save();
-
-        return res.status(200).json({ meetingToMod });
+        */
+        return res.status(200).json({ meetingToMod })
     } catch (error) {
-        return res.status(500).json({ message: 'Error adding user to meeting', error });
+        return res.status(500).json({ message: 'Error adding user to meeting', error })
     }
 }
 
@@ -180,9 +191,9 @@ const delUserMeeting = async (req, res, next) => {
         if (!meetingToMod) {
             return res.status(404).json({ message: 'Meeting id not found' });
         }
-
-        meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user => { user.userId.toString() != userId })
-
+        console.log(meetingToMod.meetingUsers.map(user))
+        meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user => user.userId.toString() != userId )
+        deleteMeetingUser(meetingId, userId)
         await meetingToMod.save();
 
         return res.status(200).json({ meetingToMod });
@@ -192,31 +203,25 @@ const delUserMeeting = async (req, res, next) => {
 }
 
 //Obtener users del meetings 
-const getMeetingUsers = async (req, res, next) => {
+const getMeetingUsers = async (req, res) => {
     try {
-        const meetingId = req.params.meetingId;
-        const meeting = await Meeting.findById(meetingId);
-        if (meeting) {
-            res.status(200).json({
-                status: 200,
-                message: "Meeting Users",
-                users: meeting.meetingUsers
-            });
-        } else {
-            res.status(404).json({
-                status: 404,
-                message: "Meeting not found"
-            });
-        }
+      const { meetingId } = req.body;
+  
+      const meeting = await Meeting.findById(meetingId).populate({
+        path: 'meetingUsers.userId',
+        model: 'User'
+      })
+  
+      if (!meeting) {
+        return res.status(404).json({ message: 'Meeting not found' })
+      }
+  
+      res.json(meeting.meetingUsers);
     } catch (error) {
-        next(error);
-        res.status(500).json({
-            status: 500,
-            message: "Internal Server Error",
-            error: error.message
-        });
+      res.status(500).json({ message: error.message })
     }
-}
+  }
+
 // Añadir un rol a usuario.
 const addRoleToMeetingUser = async (req, res) => {
     try {

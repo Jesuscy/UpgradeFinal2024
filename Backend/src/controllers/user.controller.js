@@ -20,7 +20,6 @@ const getUser = async (req, res, next) => {
     catch (error) {
         next(error)
     }
-
 }
 
 const getUsers = async (req, res, next) => {
