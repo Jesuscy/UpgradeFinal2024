@@ -192,6 +192,7 @@ const delUserMeeting = async (req, res, next) => {
             return res.status(404).json({ message: 'Meeting id not found' });
         }
         meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user => user.userId.toString() != userId )
+        console.log(meetingToMod.meetingUsers)
         await deleteMeetingUser(meetingId, userId)
         await meetingToMod.save();
 
