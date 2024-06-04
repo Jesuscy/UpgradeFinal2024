@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const MeetingUserSchema = require('./meetingUser.model')
-
+const {meetingUserSchema} = require('./meetingUser.model')
   const meetingSchema = new mongoose.Schema({
     meetingName: {
       type: String,
@@ -13,7 +12,7 @@ const MeetingUserSchema = require('./meetingUser.model')
       unique: true,
     },
     meetingRoles: [{ type: String }],
-    meetingUsers: [MeetingUserSchema]
+    meetingUsers: [meetingUserSchema]
   });
 
 
@@ -22,7 +21,7 @@ const MeetingUserSchema = require('./meetingUser.model')
   
 
 meetingSchema.methods.addRoleToUser = async (userId, rol) =>{
-  const user = await MeetingUserSchema.find(meetingUser => meetingUser.userId.toString() === userId.toString())
+  const user = await meetingUserSchema.find(meetingUser => meetingUser.userId.toString() === userId.toString())
   if (user) {
       if (!user.roles.inclundes(rol)) {
           user.roles.push(rol)
@@ -38,7 +37,7 @@ meetingSchema.methods.addRoleToUser = async (userId, rol) =>{
 }
 
 meetingSchema.methods.removeRoleFormUser = async (userId, rol) =>{
-  const user = await MeetingUserSchema.find(meetingUser => meetingUser.userId.toString() === userId.toString())
+  const user = await meetingUserSchema.find(meetingUser => meetingUser.userId.toString() === userId.toString())
   if (user) {
       const roleIndex = user.roles.indexOf(rol)
       if (roleIndex > -1) {

@@ -8,5 +8,6 @@ const meetingUserSchema = new mongoose.Schema({
   
 })
 
+const MeetingUser = mongoose.model('MeetingUser',meetingUserSchema,'meetingUsers');
 
-module.exports = meetingUserSchema
+module.exports = {meetingUserSchema,MeetingUser}

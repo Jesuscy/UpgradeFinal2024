@@ -2,6 +2,7 @@ const Meeting = require('../models/meeting.model')
 const meetingRouter = require('../routes/meeting.router')
 const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 const mongoose = require('mongoose')
+
 const {createMeetingUser,deleteMeetingUser,updateMeetingUser} = require('./meetingUser.controller')
 //Obtener Meeting
 const getMeeting = async (req, res, next) => {
@@ -159,23 +160,22 @@ const addUserMeeting = async (req, res, next) => {
         if (!meetingToMod) {
             return res.status(404).json({ message: 'Meeting id not found' })
         }
-        const userExists = meetingToMod.meetingUsers.some(user => user.userId.toString() !== userId)
+        const userExists = meetingToMod.meetingUsers.some(user => user.userId.toString() === userId)
         
         if (userExists) {
             return res.status(400).json({ message: 'User already in the meeting' })
         }
         //Creo Objeto con la estructura de meetingUser y lo sumo al array
-       // const objectMeetingId = mongoose.Types.ObjectId(meetingId)
-        //const objectUserId = mongoose.Types.ObjectId(userId)
-        console.log(typeof objectMeetingId ,typeof objectUserId , typeof roles)
-        /*const newMeetingUserOrError = await createMeetingUser(meetingId, userId, roles)
+       
+        
+        const newMeetingUserOrError = await createMeetingUser(meetingId, userId, roles)
         if (typeof newMeetingUserOrError === 'string') {
             return res.status(500).json({ message: newMeetingUserOrError })
         }
         // Si newMeetingUserOrError es un objeto MeetingUser, lo agregamos al array
         meetingToMod.meetingUsers.push(newMeetingUserOrError);
+        console.log(meetingToMod.meetingUsers)
         await meetingToMod.save();
-        */
         return res.status(200).json({ meetingToMod })
     } catch (error) {
         return res.status(500).json({ message: 'Error adding user to meeting', error })
@@ -191,9 +191,8 @@ const delUserMeeting = async (req, res, next) => {
         if (!meetingToMod) {
             return res.status(404).json({ message: 'Meeting id not found' });
         }
-        console.log(meetingToMod.meetingUsers.map(user))
         meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user => user.userId.toString() != userId )
-        deleteMeetingUser(meetingId, userId)
+        await deleteMeetingUser(meetingId, userId)
         await meetingToMod.save();
 
         return res.status(200).json({ meetingToMod });
