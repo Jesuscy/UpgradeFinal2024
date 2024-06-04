@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from '../../../public/img/FileCoMMite-log.png'
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
