@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const fileRouter = require("./src/routes/file.router");
 const authRouter = require("./src/routes/user.router");
 const meetingRouter = require("./src/routes/meeting.router");
+const meetingUserRouter = require("./src/routes/meetingUser.router");
+
 const { connect } = require("./src/utils/db");
 
 require("dotenv").config();
@@ -16,6 +18,7 @@ app.use(express.json());
 app.use("/user", authRouter);
 app.use("/file", fileRouter);
 app.use("/meeting", meetingRouter);
+app.use("/meetingUser", meetingUserRouter);
 
 app.get("/", (request, response) => {
   response.status(200).json({
