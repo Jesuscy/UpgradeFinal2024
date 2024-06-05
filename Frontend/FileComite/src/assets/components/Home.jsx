@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Header } from '../common/Header'
 import { Link } from 'react-router-dom'
 import { NewMeeting } from '../common/NewMeeting'
+import { FileRows } from '../common/FileRows'
 
 export const Home = () => {
 
@@ -104,6 +105,7 @@ export const Home = () => {
                         </div>
                     </div>
                 </div>
+                <FileRows/>
             </div>
         </>
     )
