@@ -153,4 +153,4 @@ const logoutUser = (req, res, next) => {
 };
 
 
-module.exports = { getUser, getUsers, createUser, deleteUser, logUser,logoutUser }
+module.exports = { getUser, getUsers, createUser, deleteUser, logUser, logoutUser }
