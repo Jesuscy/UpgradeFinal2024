@@ -3,6 +3,7 @@ import { Header } from '../common/Header'
 import { Link } from 'react-router-dom'
 import { NewMeeting } from '../common/NewMeeting'
 import { FileRows } from '../common/FileRows'
+import { UploadFile } from '../common/UploadFile'
 
 export const Home = () => {
 
@@ -97,7 +98,7 @@ export const Home = () => {
 
 
                             </div>
-                            <div className="col-md-9 col-sm-12 col-xs-12">{<FileRows />
+                            <div className="col-md-9 col-sm-12 col-xs-12">{<UploadFile/>
                             }
                             </div>
 
