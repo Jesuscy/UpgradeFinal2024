@@ -1,35 +1,22 @@
-import React from 'react'
+import React from "react";
 
- export const SearchMeeting = () => {
+export const SearchMeeting = () => {
   return (
-    <div>Search Meeting</div>
-  )
-}
-
-export default SearchMeeting
-
-/* import React, { useState } from 'react';
-
-const Meeting = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const toggleVisibility = () => {
-    setIsVisible(!isVisible);
-  };
-
-  return (
-    <div>
-      <button onClick={toggleVisibility}>
-        {isVisible ? 'Ocultar Detalles' : 'Mostrar Detalles'}
-      </button>
-      {isVisible && (
-        <div>
-          <p>Este es el contenido de la reunión.</p>
-          <p>Aquí puedes poner más detalles sobre la reunión.</p>
+    <div className="container create-meeting-form">
+      <div class="card text-center">
+        <div class="card-header">Meeting</div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">
+            With supporting text below as a natural lead-in to additional
+            content.
+          </p>
+          <a href="#" class="btn-morado">
+            Go somewhere
+          </a>
         </div>
-      )}
+        <div class="card-footer text-body-secondary">2 days ago</div>
+      </div>
     </div>
   );
 };
-
-export default Meeting; */
