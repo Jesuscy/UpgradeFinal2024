@@ -1,23 +1,43 @@
-import React, { useState } from "react";
-import { Header } from "../common/Header";
-import { Link } from "react-router-dom";
-import { SearchMeeting } from "./SearchMeeting";
-import { InfoAndTutorials } from "./InfoAndTutorials"
-import { NewMeeting } from "../common/NewMeeting";
+import React, { useState } from 'react'
+import { Header } from '../common/Header'
+import { Link } from 'react-router-dom'
+import { NewMeeting } from '../common/NewMeeting'
+import { FileRows } from '../common/FileRows'
+import { UploadFile } from '../common/UploadFile'
 
 export const Home = () => {
-  const serverPort = [3000];
-  //UseState para controlar el server seleccionado.
-  const [selectedServer, selectServer] = useState();
-  //UseState para controlar si Meeting info se muestra.
-  const [showMeetingsInfo, setShowMeetingInfo] = useState(true);
-  const [activeComponent, setActiveComponent] = useState('NewMeeting');
 
-  const toggleMeetingsInfo = () => {
-    setShowMeetingInfo(!showMeetingsInfo);
-  };
+    const serverPort = [3000]
+    //UseState para controlar el server seleccionado.
+    const [selectedServer, selectServer] = useState()
+    //UseState para controlar si Meeting info se muestra.
+    const [showMeetingsInfo, setShowMeetingInfo] = useState(true)
 
-  const listMeetings = () => {
+    const toggleMeetingsInfo = () => {
+        setShowMeetingInfo(!showMeetingsInfo)
+    }
+
+    const listMeetings = () => {
+        return (
+            <div className="row meeting-row">
+
+                <div className="col-md-9 col-sm-12 col-xs-12 meeting-specs-name">{/*Nombre Reunion */}
+                    <Link to='/meeting' style={{ textDecoration: 'none', color: 'black' }}>
+                        <strong>FileCommite</strong>
+                    </Link>
+
+                </div>
+
+                <div className="col-md-3 col-sm-12 col-xs-12 meeting-specs-button">{/*Botones Conectar / Desconectar */}
+                    <strong>X</strong>
+                </div>
+            </div>
+
+        )
+
+    }
+
+
     return (
       <div className="row meeting-row">
         <div className="col-md-9 col-sm-12 col-xs-12 meeting-specs-name">
@@ -119,7 +139,45 @@ export const Home = () => {
                 {<InfoAndTutorials />}
               </div> */}
 
+                    <div className="container">
+                        <div className="row meetings-creator">
+                            <div className="col-md-3 col-sm-12 col-xs-12 meetings-options">
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div className="meeting-option">
+                                            Create a new Meeting
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div className="meeting-option">
+                                            Shearch Meeting
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div className="meeting-option">
+                                            Info and tutorials
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div className="meeting-option">
+                                            <div onClick={toggleMeetingsInfo}>
+                                                {showMeetingsInfo ? 'Hide Meetings Info' : 'Show Meetings Info'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+
+                            </div>
+                            <div className="col-md-9 col-sm-12 col-xs-12">{<UploadFile/>
+                            }
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

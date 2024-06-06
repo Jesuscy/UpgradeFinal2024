@@ -35,8 +35,7 @@ const createMeetingUser = async (meetingId, userId, roles) => {
   }
 }
 
-const deleteMeetingUser = async (userId, meetingId) => {
-  console.log(typeof userId, typeof meetingId)
+const deleteMeetingUser = async (meetingId, userId) => {
   try {
     const meetingUser = await MeetingUser.findOneAndDelete({ userId: userId, meetingId : meetingId})
     console.log(meetingUser)
