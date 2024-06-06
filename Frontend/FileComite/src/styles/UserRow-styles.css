@@ -1,0 +1,53 @@
+.user-row {
+    display: flex;
+    font-family: 'Baloo 2 Variable', system-ui;
+    font-weight: 600;
+    box-shadow: rgba(36, 36, 36, 0.678) 0px 7px 29px 0px;
+    font-size:16px;
+    transform: scale(0.8);
+    margin: 20px;
+    transition: 0.3s ease;
+    border-radius: 10px;
+}
+
+.user-row:hover {
+    box-shadow: rgba(43, 43, 44, 0.3) 0px 0px 0px 0px;
+}
+
+.user-profile {
+    background-color: rgb(226, 226, 226);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.user-profile{
+    padding: 10px 10px;
+}
+
+
+.user-specs-button {
+    
+    display: flex;
+    justify-content: center;
+    transition: 0.3s ease;
+    color: black;      
+}
+
+.roll{
+    border-bottom-left-radius: 5px;
+    background-color:rgb(85,91,255);
+}
+
+.delete{
+    border-bottom-right-radius: 5px;
+    background-color: rgb(255, 131, 131);
+}
+
+.user-specs-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
