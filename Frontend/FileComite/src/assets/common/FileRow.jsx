@@ -1,15 +1,18 @@
 import React from 'react'
 import '../../styles/FileRowStyles.css'
-
+import download from '/img/download-file-icon.png'
 
 export const FileRow = (props) => {
     const file = props.data
     return (
-        <div className='col-md-12 file-container'>
-                <div className="col">{file.filename}</div>
-                <div className="col">{file.meetingId}</div>
-                <div className="col">{file.rol}</div>
-                <div className="col">{file.filepath}</div>
-=        </div>
+        <div className='row file-container'>
+    
+                <div className="col file-spec">{file.filename}</div>
+                <div className="col file-spec">{file.rol}</div>
+                <div className="col file-spec">{file.filepath}</div>
+                <div className="col file-spec file-actions">
+                    <button><img src={download}/></button>
+                </div>
+      </div>
     )
 }
