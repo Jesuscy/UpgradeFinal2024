@@ -49,7 +49,8 @@ export const Home = () => {
   return (
     <>
       <Header />
-      <div className="row meetings-section">
+      <div className="meetings-section">
+      <div className="row">
         {/* Start Meetings Info Section */}
         {showMeetingsInfo && (
           <div className="col-md-3 col-sm-12 col-xs-12 meetings-info">
@@ -104,6 +105,7 @@ export const Home = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
