@@ -43,14 +43,14 @@
     color: black;
 }
 
-.user-rows{
+.user-rows {
     max-height: 70vh;
-    overflow-y: auto;   /* Habilita el scroll vertical */
+    overflow-y: auto;  
     overflow-x: hidden;
-    clip-path: inset(0 round 8px); /* Recorta el área visible */
+    clip-path: inset(0 round 8px); 
 }
 
-.meeting-box{
+.meeting-box {
     display: flex;
     flex-direction: column;
 }
@@ -66,13 +66,13 @@
     padding-top: 2vh;
 }
 
-.meetings-select{
+.meetings-select {
     display: flex;
     justify-content: space-evenly;
     height: 60vh;
 }
 
-.meetings-select__options{
+.meetings-select__options {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,20 +83,20 @@
     padding: 10px;
 }
 
-.meetings-select__options p{
+.meetings-select__options p {
     color: black;
-    display: flex;             /* Habilitar flexbox */
-    justify-content: center;   /* Centrar horizontalmente */
+    display: flex;             
+    justify-content: center;   
     align-items: center;
     text-align: center;
-    background-color:rgb(221,221,221);
+    background-color: rgb(221, 221, 221);
     border-radius: 5px;
     height: 50%;
     padding: 10px 20px;
     margin: 3vh 5vh;
 }
 
-.meetings-select__button{  
+.meetings-select__button {  
     margin: auto; 
     font-size: 22px;
     border-radius: 10px;

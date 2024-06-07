@@ -20,29 +20,29 @@
     border-bottom-left-radius: 2px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     border-radius: 5px;
-}
-
-.user-profile{
     padding: 10px 10px;
 }
 
+.user-profile img{
+    max-width: 50px;
+    max-height: 50px;
+}
 
 .user-specs-button {
-    
     display: flex;
     justify-content: center;
     transition: 0.3s ease;
     color: black;      
 }
 
-.roll{
+.role {
     border-bottom-left-radius: 5px;
-    background-color:rgb(85,91,255);
+    background-color: rgb(85, 91, 255);
 }
 
-.delete{
+.delete {
     border-bottom-right-radius: 5px;
     background-color: rgb(255, 131, 131);
 }
