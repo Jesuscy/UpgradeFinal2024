@@ -3,7 +3,7 @@ import '../../styles/FileRowStyles.css'
 export const UploadFile = () => {
     return (
         <div className='upload-file'>
-            <div className="row"><h2>Upload New File</h2></div>
+            <div className="row"><h2>UPLOAD NEW FILE</h2></div>
                 <div className="file-name-placeholder">
                     FileName-example
                 </div>
