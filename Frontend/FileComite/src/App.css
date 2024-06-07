@@ -32,10 +32,9 @@
 
 /*HOME STYLES*/
 
-/* .meetings-section {
-  height: 80vh;
-
-} */
+.meetings-section {
+  margin-top: 100px;
+} 
 
 .meeting-row {
   display: flex;
@@ -83,8 +82,6 @@
   font-weight: 500;
   margin-top: 15px;
   padding: 30px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-  border-right: 1px solid white;
 }
 
 .recent-meetings {
