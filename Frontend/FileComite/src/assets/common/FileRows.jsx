@@ -39,18 +39,18 @@ const fileExample = [
 ];
 
 export const FileRows = () => {
-    const [showUpload, setShowUpload] = useState(false);
+    const [showUpload, setShowUpload] = useState(false)
 
     const toogleShowUpload = () => {
-        setShowUpload(!showUpload);
-    };
+        setShowUpload(!showUpload)
+    }
 
     return (
         <div className='file'>
             <div className="files-header">
                 MEETING TITLE
             </div>
-            <UploadFile data={toogleShowUpload} />
+            {showUpload && <UploadFile toogleShowUpload={toogleShowUpload}/>}
             <div className="files-container">
                 {fileExample.map((file, index) => (
                     <FileRow
@@ -72,5 +72,5 @@ export const FileRows = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

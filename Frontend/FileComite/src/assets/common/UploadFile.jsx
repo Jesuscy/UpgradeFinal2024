@@ -1,7 +1,9 @@
 import React from 'react'
 import '../../styles/UploadFileStyles.css'
-export const UploadFile = ({toogleShowUpload}) => {
+export const UploadFile = (props) => {
 
+    const toogleShowUpload = props.toogleShowUpload
+    console.log(toogleShowUpload)
     const selectFileToUpload = () => {
 
     }
@@ -28,7 +30,7 @@ export const UploadFile = ({toogleShowUpload}) => {
                 }
             </div>
             <div className='row'><button>upload</button></div>
-            <div className='row close'><button onClick={()=>toogleShowUpload}>close</button></div>
+            <div className='row close'><button onClick={toogleShowUpload}>close</button></div>
 
 
         </div>
