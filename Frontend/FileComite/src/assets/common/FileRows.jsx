@@ -39,6 +39,9 @@ const fileExample = [{
 export const FileRows = () => {
     return (
         <div className='file'>
+            <div className="file-header">
+                MEETING TITLE
+            </div>
             <div className="files-container">
                 {fileExample.map((file) => (
                     <FileRow data={{
@@ -58,7 +61,7 @@ export const FileRows = () => {
                     <div className="files-new-file">
                         UPLOAD FILE
                     </div>
-
+ 
                 </div>
             </div>
         </div>
