@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import { Header } from "../common/Header";
 import UserRow from '../common/UserRow.jsx';
 import SelectUserRole from '../common/SelectUserRole.jsx';
@@ -6,6 +7,7 @@ import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
 
 export const Meeting = (props) => {
+    const navigate = useNavigate(); // Obtener la instancia de navigate
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
 
@@ -52,6 +54,10 @@ export const Meeting = (props) => {
         }
     };
 
+    const handleBackClick = () => {
+        navigate('/'); // Navegar a la ruta de inicio
+    };
+
     return (
         <>
             <Header />
@@ -78,6 +84,11 @@ export const Meeting = (props) => {
                         </div>
                         <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
                             {renderComponent()}
+                            <div className="row">
+                                <div className="col-md-12 col-sm-12 col-xs-12 box__meetings-back">
+                                    <button className='meetings-back__button' onClick={handleBackClick}>Back</button> {/* Añadir onClick */}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

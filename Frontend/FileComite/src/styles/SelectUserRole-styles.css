@@ -37,7 +37,7 @@
 }
 
 .select-option {
-    margin: 50px;
+    margin: 15px;
     border-radius: 10px;
     padding: 10px;
     border: 3px solid rgb(148, 104, 165);
@@ -63,7 +63,7 @@
 }
 
 .role-selector-button {
-    margin-top: 60px;
+    margin-top: 20px;
     font-size: 18px;
     border-radius: 10px;
     background-color: rgb(141, 54, 175);
@@ -76,4 +76,8 @@
 
 .role-selector-button:hover {
     background-color: rgb(120, 45, 150);
+}
+
+.form-selct {
+    font-family: "Baloo 2 Variable", system-ui;
 }

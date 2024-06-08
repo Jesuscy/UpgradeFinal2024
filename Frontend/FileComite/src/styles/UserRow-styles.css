@@ -36,10 +36,13 @@
     color: black;    
     border: 2px solid rgba(137, 43, 226, 0);
     transition: 0.5s;
- 
 }
 
-.role {
+.currentRole{
+    background-color: rgb(197,197,197);
+}
+
+.selectRole {
     border-bottom-left-radius: 5px;
     background-color: rgb(92, 202, 116);
 }

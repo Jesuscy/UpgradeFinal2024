@@ -1,9 +1,9 @@
-.meeting-content {
+/* .meeting-content {
     margin-top: 5vh;
-}
+} */
 
 .meeting-container {
-    height: 85vh;
+    height: 90vh;
     font-family: "Major Mono Display", monospace;
 }
 
@@ -71,6 +71,7 @@
     display: flex;
     justify-content: space-evenly;
     height: 60vh;
+    margin-bottom: 25px;
 }
 
 .meetings-select__options {
@@ -102,4 +103,17 @@
     font-size: 22px;
     border-radius: 10px;
     background-color: rgb(141, 54, 175);
+}
+
+.box__meetings-back{
+    padding: 20px;
+    display: flex;
+}
+
+.meetings-back__button {  
+    margin: auto; 
+    font-size: 22px;
+    border-radius: 10px;
+    background-color: rgb(141, 54, 175);
+    padding: 3px 80px;
 }
