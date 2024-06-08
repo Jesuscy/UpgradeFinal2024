@@ -49,6 +49,11 @@ export const Meeting = (props) => {
                                 <button className="meetings-select__button" onClick={() => handleSetRenderOption('Meeting')}>VIEW</button>
                             </div>
                         </div>
+                        <div className="row">
+                                <div className="col-md-12 col-sm-12 col-xs-12 box__meetings-back">
+                                    <button className='meetings-back__button' onClick={handleBackClick}>Back</button> {/* Añadir onClick */}
+                                </div>
+                            </div>
                     </>
                 );
         }
@@ -83,11 +88,9 @@ export const Meeting = (props) => {
                             </div>
                         </div>
                         <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
+                            <div>
                             {renderComponent()}
-                            <div className="row">
-                                <div className="col-md-12 col-sm-12 col-xs-12 box__meetings-back">
-                                    <button className='meetings-back__button' onClick={handleBackClick}>Back</button> {/* Añadir onClick */}
-                                </div>
+                            
                             </div>
                         </div>
                     </div>
