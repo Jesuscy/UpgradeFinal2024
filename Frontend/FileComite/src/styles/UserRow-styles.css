@@ -36,27 +36,11 @@
     color: black;    
     border: 2px solid rgba(137, 43, 226, 0);
     transition: 0.5s;
-<<<<<<< HEAD
- 
-=======
-
-  
->>>>>>> 167759628f7543f04e27fcc9265b4ff0ada3c8c6
 }
 
-<<<<<<< HEAD
 .role {
     border-bottom-left-radius: 5px;
-<<<<<<< HEAD
-    background-color: rgb(85, 91, 255);
-=======
-.roll {
-    border-bottom-left-radius: 5px;
     background-color: rgb(92, 202, 116);
->>>>>>> uploadFile
-=======
-    background-color: rgb(92, 202, 116);
->>>>>>> 167759628f7543f04e27fcc9265b4ff0ada3c8c6
 }
 
 .delete {

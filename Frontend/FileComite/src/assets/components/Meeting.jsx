@@ -77,7 +77,7 @@ export const Meeting = (props) => {
                             </div>
                         </div>
                         <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
-                           {renderComponent()}
+                            {renderComponent()}
                         </div>
                     </div>
                 </div>
