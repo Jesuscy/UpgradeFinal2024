@@ -9,7 +9,6 @@
 
 #root {
   background-color: #3a3a3a;
-  /* height: 100vh; */
 }
 
 /*HEADER STYLES*/
@@ -34,6 +33,7 @@
 
 .meetings-section {
   margin-top: 100px;
+  height: 100vh;
 } 
 
 .meeting-row {
