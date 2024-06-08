@@ -50,7 +50,7 @@ export const Home = () => {
     <>
       <Header />
       <div className="meetings-section">
-      <div className="row">
+      <div className="row" >
         {/* Start Meetings Info Section */}
         {showMeetingsInfo && (
           <div className="col-md-3 col-sm-12 col-xs-12 meetings-info">
@@ -100,7 +100,7 @@ export const Home = () => {
                 </div>
               </div>
               <div className="col-md-9 col-sm-12 col-xs-12">
-                {renderComponent()}
+                {<UploadFile/>}
               </div>
             </div>
           </div>

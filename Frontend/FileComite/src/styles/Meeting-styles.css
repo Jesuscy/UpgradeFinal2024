@@ -53,6 +53,7 @@
 .meeting-box {
     display: flex;
     flex-direction: column;
+    
 }
 
 .box__meetings-title {

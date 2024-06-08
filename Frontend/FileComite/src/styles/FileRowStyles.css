@@ -48,6 +48,16 @@
 /*FIN FILEROWS*/
 
 /*INICIO FILEROW*/
+.files-header{
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 2vh auto;
+  align-items: center;
+  background-color: #3f3e3ed2;
+  color: rgb(241, 241, 241);
+  box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
 .file-container {
   display: flex;
   padding: 20px;
@@ -86,8 +96,9 @@
   border-radius: 10px;
   background-color: #313131d2;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-  font-family: 'Major Mono Display', monospace;
-  color: rgb(199, 199, 199);
+  font-family: monospace;
+  color: rgb(255, 255, 255);
+  text-align: center;
 }
 
 .upload-file button {
@@ -101,12 +112,16 @@
   cursor: pointer;
   text-align: center;
   padding: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
   font-family: 'Baloo 2 Variable', system-ui;
+  font-weight: 800;
   font-size: 20px;
   min-width: 60%;
   border-radius: 10px;
   background-color: rgb(91, 86, 94);
+  transition: 0.3s;
   box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
+
+
 /*FIN UPLOADFILE*/
