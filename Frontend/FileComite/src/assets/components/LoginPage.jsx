@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Header } from '../common/Header';
 import '../../styles/LoginStyles.css'
 
 
@@ -13,6 +13,11 @@ const LoginPage = () => {
         alert(`Email: ${email}\nPassword: ${password}`);
     };
     return (
+        
+        <>
+        <Header />
+
+        <div className='general-login'>
 
         <div className="col-md-12 col-sm-12 col-xs-12 container-login">
             <h1>Login</h1>
@@ -51,6 +56,8 @@ const LoginPage = () => {
         </div>
         </div>
 
+        </div>
+        </>
         
     );
 };

@@ -15,15 +15,11 @@ export const Header = () => {
                     SHARE FILES
                 </div>
                 <div className="col-md-2">
-                    <h2>INFO</h2>
-                </div>
-                
-
-                <div className="col-md-2">
                 <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
-                    Login
+                    <h2>Login</h2>
                 </Link>
                 </div>
+                
                 {/* <div className="col-md-2">
                     <button>Logout</button>
                 </div> */}
