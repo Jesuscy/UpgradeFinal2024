@@ -1,11 +1,8 @@
-/* .meeting-content {
-    margin-top: 5vh;
-} */
-
 .meeting-container {
     height: 90vh;
     font-family: "Major Mono Display", monospace;
 }
+
 
 .meetings__users-content {
     display: flex;
