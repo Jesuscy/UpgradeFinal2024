@@ -14,7 +14,7 @@ width: 100vi;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: brown;
+ 
     font-family: 'Roboto', sans-serif;
 }
 
@@ -28,6 +28,13 @@ width: 100vi;
     text-align: center;
     margin-bottom: 30px;
     font-family: 'Major Mono Display', monospace;
+}
+
+.login-button {
+    margin: auto;
+    font-size: 22px;
+    border-radius: 10px;
+    background-color: rgb(141, 54, 175);
 }
 
 .form-group {
@@ -49,3 +56,4 @@ width: 100vi;
     font-family: 'Major Mono Display', monospace;
     color: rgb(199, 199, 199);
 }
+
