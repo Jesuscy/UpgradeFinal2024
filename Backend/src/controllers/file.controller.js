@@ -21,34 +21,19 @@ const getFilesByMeeting = async (req, res) => {
     }
 }
 
-const createFile = async (req, res, next) => {
-    const {filename, meetingId, rol} = req.body
-    console.log(filename, meetingId, rol)
-    try {
-        const {filename, meetingId, rol} = req.body
-        const file = new File(
-            {
-                filename: filename,
-                meetingData: {
-                    meetingId: meetingId,
-                    rol:rol
-                } 
-
-            }
-        )
+const createFile = async (req,res,next) =>{
+    try{
+        const file = new File(req.body)
         if(req.file){
             file.filepath = req.file.path
         }
-
-
-      
         file.save()
         return res.status(201).json(file)
     }
-    catch (error) {
-        return res.status(500).json({ message: 'Error creating file' })
+    catch(error){
+        return res.status(500).json({message: 'Error creating file'})
 
     }
-} 
-    
+}
+
 module.exports = { getFilesByMeeting, createFile }
