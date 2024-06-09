@@ -8,6 +8,10 @@ const fileSchema = new mongoose.Schema({
     meetingId: { type: mongoose.Schema.Types.ObjectId, ref: "Meeting" },
     rol: [{ type: String, required: true }],
   },
+  filepath :{
+    type: String
+
+  }
 });
 
 const File = mongoose.model("File", fileSchema, "files");

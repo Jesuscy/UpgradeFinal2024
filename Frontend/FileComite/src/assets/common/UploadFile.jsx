@@ -31,28 +31,32 @@ export const UploadFile = (props) => {
             alert('First select a file.')
             return
         }
-        const formData = new FormData()
-        console.log('FilePath'+selectedFile.path, selectedFile)
-        formData.append('filename', selectedFile.name)
-        formData.append('filecontent', selectedFile)
-        formData.append('meetingData[meetingId]', '664e1d52aedc946ee7634031')
-        formData.append('meetingData[rol]', JSON.stringify(rol))
-        console.log(formData)
-        try {
-            await axios.post('http://127.0.0.1:3333/file/upload', formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }})
+            const formData = new FormData()
+
+            /* formData.append('filename', selectedFile.name)
+            formData.append('filecontent', selectedFile)
+            formData.append('meetingData[meetingId]', '664e1d52aedc946ee7634031')
+            formData.append('meetingData[rol]', JSON.stringify(rol))
+ */
+            formData.append('filename', selectedFile.name);
+            formData.append('filecontent', selectedFile);
+            formData.append('meetingId', '664e1d52aedc946ee7634031')
+            formData.append('rol', JSON.stringify(rol))
+            try {
+                await axios.post('http://127.0.0.1:3333/file/upload', formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }})
+
+            }
+            catch(error){
+                console.log(error)
+            }
+
+
 
         }
-        catch(error){
-            console.log(error)
-        }
-
-
-
-    }
 
     return (
         <div className="upload-modal-overlay">
