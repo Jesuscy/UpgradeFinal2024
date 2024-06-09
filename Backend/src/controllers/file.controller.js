@@ -1,6 +1,7 @@
 const File = require("../models/file.model");
 const HTTPSTATUSCODE = require('../utils/httpStatusCode');
 const mongoose = require("mongoose");
+const cloudinary = require("../middleware/upload.file")
 
 
 const getFilesByMeeting = async (req, res) => {
@@ -21,19 +22,54 @@ const getFilesByMeeting = async (req, res) => {
     }
 }
 
-const createFile = async (req,res,next) =>{
+/* const createFile = async (req,res,next) =>{
+    const {filename, meetingId, rol, file} = req.body
+    console.log(filename,meetingId,rol,file)
     try{
-        const file = new File(req.body)
-        if(req.file){
-            file.filepath = req.file.path
-        }
-        file.save()
-        return res.status(201).json(file)
+        const {filename, meetingId, rol, file} = req.body
+
+        const result = cloudinary.uploader.upload(file, {
+            folder: Files
+        })
+        const newFile = new File({
+            filename: filename,
+            meetingData:{
+                meetingId: meetingId,
+                rol: rol
+            },
+            filepath: (await result).secure_url
+        })
+
+        return res.status(201).json(newFile)
     }
     catch(error){
         return res.status(500).json({message: 'Error creating file'})
 
     }
 }
+ */
 
+const createFile = async (req, res, next) => {
+    try {
+        const { filename, meetingId, rol, file } = req.body.data;
+        
+        const result = await cloudinary.uploader.upload(file ,{
+        folder: 'Files' // Asegúrate de que 'Files' sea una cadena y no una variable sin definir
+      });
+
+        const newFile = new File({
+            filename: filename,
+            meetingData: {
+                meetingId: meetingId,
+                rol: rol
+            },
+            filepath: result.secure_url
+        });
+
+        return res.status(201).json(newFile);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error creating file' });
+    }
+};
 module.exports = { getFilesByMeeting, createFile }

@@ -9,8 +9,16 @@ export const UploadFile = (props) => {
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
 
-        const rol = [ 'Admin']
-
+    const toBase64 = (file) =>{
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = error => reject(error)
+        });
+    }
+    
+    
     const handleButtonClick = () => {
         fileInputRef.current.click()
     };
@@ -30,17 +38,22 @@ export const UploadFile = (props) => {
         if (!selectedFile) {
             alert('First select a file.')
             return
-        }
-        const formData = new FormData()
+        }   
+        const fileTo64 = await toBase64(selectedFile)
         
-        formData.append('filecontent', selectedFile)
-        formData.append('filename', selectedFile.name)
-        formData.append('meetingId', '664e1d52aedc946ee7634031')
-        formData.append('rol', JSON.stringify(['Rol1']))
-
-
+        
+        const data = {
+            filename: selectedFile.name,
+            meetingId: '664e1c51cc66cb7a785a7320',
+            rol:'Rol1',
+            file:fileTo64
+        }
+               
         try{
-            await axios.post('http://127.0.0.1:3333/file/upload', formData,{
+            console.log('Mando Peticion')
+            await axios.post('http://127.0.0.1:3333/file/upload', {data},{
+            
+            },{
 
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -73,4 +86,4 @@ export const UploadFile = (props) => {
             </div>
         </div>
     );
-};
+}
