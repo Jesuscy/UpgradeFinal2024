@@ -24,7 +24,9 @@ const getFilesByMeeting = async (req,res) =>{
 const createFile = async (req,res,next) =>{
     try{
         const file = new File(req.body)
-        if(req.file){
+        console.log({file})
+
+       if(req.file){
             file.filepath = req.file.path
         }
         file.save()

@@ -9,7 +9,7 @@ export const UploadFile = (props) => {
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
 
-        const rol = [ 'Rol1', 'Rol2']
+        const rol = [ 'Admin']
 
     const handleButtonClick = () => {
         fileInputRef.current.click()
@@ -32,14 +32,14 @@ export const UploadFile = (props) => {
             return
         }
         const formData = new FormData()
-        
+        console.log('FilePath'+selectedFile.path, selectedFile)
         formData.append('filename', selectedFile.name)
         formData.append('filecontent', selectedFile)
-        formData.append('meetinId', '664e1d52aedc946ee7634031')
-        formData.append('rol', JSON.stringify(rol))
-
+        formData.append('meetingData[meetingId]', '664e1d52aedc946ee7634031')
+        formData.append('meetingData[rol]', JSON.stringify(rol))
+        console.log(formData)
         try {
-            axios.post('http://127.0.0.1:3333/file/upload', formData,
+            await axios.post('http://127.0.0.1:3333/file/upload', formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -47,7 +47,7 @@ export const UploadFile = (props) => {
 
         }
         catch(error){
-
+            console.log(error)
         }
 
 
