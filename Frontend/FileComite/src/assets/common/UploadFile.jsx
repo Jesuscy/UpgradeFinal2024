@@ -9,6 +9,8 @@ export const UploadFile = (props) => {
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
 
+        const rol = [ 'Rol1', 'Rol2']
+
     const handleButtonClick = () => {
         fileInputRef.current.click()
     };
@@ -30,7 +32,11 @@ export const UploadFile = (props) => {
             return
         }
         const formData = new FormData()
-        formData.append('file', selectedFile)
+        
+        formData.append('filename', selectedFile.name)
+        formData.append('filecontent', selectedFile)
+        formData.append('meetinId', '664e1d52aedc946ee7634031')
+        formData.append('rol', JSON.stringify(rol))
 
         try {
             axios.post('http://127.0.0.1:3333/file/upload', formData,
@@ -41,7 +47,7 @@ export const UploadFile = (props) => {
 
         }
         catch(error){
-            
+
         }
 
 
@@ -53,7 +59,7 @@ export const UploadFile = (props) => {
             <div className="upload-file">
                 <div className="row"><h2>UPLOAD NEW FILE</h2></div>
                 <div className="file-name-placeholder">
-                    FileName-example
+                    {selectedFile ?  selectedFile.name : 'Select File'} 
                 </div>
                 <div className="row">
                     <button onClick={handleButtonClick}>Select file</button>
@@ -64,7 +70,7 @@ export const UploadFile = (props) => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <div className="row"><button>Upload</button></div>
+                <div className="row"><button onClick={handleFileUpload}>Upload</button></div>
                 <div className="row close"><button onClick={toogleShowUpload}>Close</button></div>
             </div>
         </div>
