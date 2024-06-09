@@ -1,13 +1,16 @@
 .user-row {
-    display: flex;
-    font-family: 'Baloo 2 Variable', system-ui;
-    font-weight: 600;
-    box-shadow: rgba(105, 105, 105, 0.678) 0px 2px 10px 0px;
-    font-size:16px;
-    transform: scale(0.9);
-    margin: 20px;
-    transition: 0.3s ease;
-    border-radius: 10px;
+        border: 3px solid;
+        border-color: #363434;
+        display: flex;
+        font-family: 'Baloo 2 Variable', system-ui;
+        font-weight: 600;
+        box-shadow: rgba(105, 105, 105, 0.678) 0px 2px 10px 0px;
+        font-size: 16px;
+        transform: scale(0.9);
+        margin: 20px;
+        transition: 0.3s ease;
+        border-radius: 7px;
+
 }
 
 .user-row:hover {
@@ -36,10 +39,13 @@
     color: black;    
     border: 2px solid rgba(137, 43, 226, 0);
     transition: 0.5s;
- 
 }
 
-.role {
+.currentRole{
+    background-color: rgb(197,197,197);
+}
+
+.selectRole {
     border-bottom-left-radius: 5px;
     background-color: rgb(92, 202, 116);
 }
