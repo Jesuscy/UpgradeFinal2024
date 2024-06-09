@@ -5,6 +5,7 @@ import UserRow from '../common/UserRow.jsx';
 import SelectUserRole from '../common/SelectUserRole.jsx';
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
+import UserRows from "../common/UserRows.jsx";
 
 export const Meeting = (props) => {
     const navigate = useNavigate(); // Obtener la instancia de navigate
@@ -28,7 +29,7 @@ export const Meeting = (props) => {
             case 'Role':
                 return <FileRows data={{ option: 'role', meetingName: 'meeting' }} />;
             case 'Meeting':
-                return <FileRows data={{ option: 'meeting', meetingName: 'meeting'}} />;
+                return <FileRows data={{ option: 'meeting', meetingName: 'meeting' }} />;
             default:
                 return (
                     <>
@@ -50,10 +51,10 @@ export const Meeting = (props) => {
                             </div>
                         </div>
                         <div className="row">
-                                <div className="col-md-12 col-sm-12 col-xs-12 box__meetings-back">
-                                    <button className='meetings-back__button' onClick={handleBackClick}>Back</button> {/* Añadir onClick */}
-                                </div>
+                            <div className="col-md-12 col-sm-12 col-xs-12 box__meetings-back">
+                                <button className='meetings-back__button' onClick={handleBackClick}>Back</button> {/* Añadir onClick */}
                             </div>
+                        </div>
                     </>
                 );
         }
@@ -77,20 +78,15 @@ export const Meeting = (props) => {
                                 </div>
                                 <div className="user-overflow">
                                     <div className="col-md-12 col-sm-12 col-xs-12 user-rows">
-                                        <UserRow onRoleClick={handleShowSelectUserRole} />
-                                        <UserRow onRoleClick={handleShowSelectUserRole} />
-                                        <UserRow onRoleClick={handleShowSelectUserRole} />
-                                        <UserRow onRoleClick={handleShowSelectUserRole} />
-                                        <UserRow onRoleClick={handleShowSelectUserRole} />
-                                        <UserRow onRoleClick={handleShowSelectUserRole} />
+                                        {/* Renderizando UserRows para mostrar la lista de usuarios */}
+                                        <UserRows onRoleClick={handleShowSelectUserRole} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
                             <div>
-                            {renderComponent()}
-                            
+                                {renderComponent()}
                             </div>
                         </div>
                     </div>
