@@ -53,9 +53,11 @@ const createFile = async (req, res, next) => {
     try {
         const { filename, meetingId, rol, file } = req.body.data;
         
-        const result = await cloudinary.uploader.upload(file ,{
-        folder: 'Files' // Asegúrate de que 'Files' sea una cadena y no una variable sin definir
-      });
+
+
+        const result = await cloudinary.uploader.upload(file, {
+            folder: 'Files' // Asegúrate de que 'Files' sea una cadena y no una variable sin definir
+        });
 
         const newFile = new File({
             filename: filename,
