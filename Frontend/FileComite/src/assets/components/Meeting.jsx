@@ -13,15 +13,15 @@ export const Meeting = (props) => {
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
     const location = useLocation();
-    const data = location.state;
-    console.log('Data desde meeting' + data);
+    const meetingId = location.state;
+    console.log('Data desde meeting' + meetingId);
 
     const [meeting, setMeeting] = useState('');
     const [usersMeeting, setUsersMeeting] = useState([]);
 
     const fetchMeetingData = async () => {
         try {
-            const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId: '664e1d52aedc946ee7634031' });
+            const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId });
             setMeeting(meeting);
             setUsersMeeting(meeting.meetingUsers)
         } catch (error) {

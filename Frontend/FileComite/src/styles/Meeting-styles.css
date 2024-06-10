@@ -1,5 +1,6 @@
 .meeting-container {
-    height: 90vh;
+    height: 100vh;
+    margin-top: 2vh;
     font-family: "Major Mono Display", monospace;
 }
 
