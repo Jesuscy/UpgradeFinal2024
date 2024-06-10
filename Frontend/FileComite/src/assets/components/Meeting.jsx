@@ -5,7 +5,6 @@ import UserRows from "../common/UserRows.jsx";
 import SelectUserRole from "../common/SelectUserRole.jsx";
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
-import UserRows from "../common/UserRows.jsx";
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
 
