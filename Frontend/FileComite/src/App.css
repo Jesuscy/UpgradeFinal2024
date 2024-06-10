@@ -235,7 +235,11 @@
   transition: 1s ease-in-out;
 }
 
-.miniContainer {
+/*FIN NewMeeting*/
+
+
+
+/* .miniContainer {
   align-items: center;
   margin: 20px auto;
   font-size: 12px;
@@ -245,15 +249,16 @@
   display: flex;
   flex-direction: row;
   transition: 1s ease-in-out;
-}
-/*FIN NewMeeting*/
+} */
+
 
 /* Search Meeting */
-.btn-morado {
+/* .btn-morado {
   color: white;
   margin: 0 auto;
   padding: 6px 12px;
   font-size: 22px;
   border-radius: 5px;
   background-color: rgb(141, 54, 175);
-}
+} */
+

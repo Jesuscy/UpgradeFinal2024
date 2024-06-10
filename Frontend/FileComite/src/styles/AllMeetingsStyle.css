@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&family=Martian+Mono:wght@100..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*INICIO FILEROWS*/
+
+.file-header{
+  display: flex;
+  flex-direction: column;
+  padding: 40px;  
+  margin: 2vh auto;
+  font-size: 40px;
+  border-radius: 10px;
+  align-items: center;
+  color: rgb(241, 241, 241);
+  background-color: #353535d2;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.files-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;  
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin: 2vh auto;
+  margin-bottom: 0px;
+  max-height: 52vh;
+  background-color: #313131d2;
+  overflow-y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.upload-file-container {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Console', monospace;
+  max-height: 52vh;
+  background-color: #313131d2;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.files-new-file {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  min-width: 60%;
+  border-radius: 10px;
+  background-color: rgb(161, 137, 228);
+  box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  transition: 0.3s;
+}
+
+.files-new-file:hover {
+  background-color: rgb(144, 115, 224);
+}
+
+/*FIN FILEROWS*/
+
+/*INICIO FILEROW*/
+.files-header{
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 2vh auto;
+  font-size: 30px ;
+  justify-content: center;
+  align-items: center;
+  background-color: #3f3e3ed2;
+  color: rgb(255, 255, 255);
+  box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.file-container {
+  display: flex;
+  padding: 20px;
+  min-width: 60%;
+  border-radius: 10px;
+  margin: 2vh auto;
+  align-items: center;
+  background-color: #3f3e3ed2;
+  color: rgb(241, 241, 241);
+  box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.file-spec {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-family: 'Major Mono Display', monospace;
+}
+
+.file-actions button {
+  margin: 5px;
+  font-size: 22px;
+  border-radius: 10px;
+  background-color: rgb(89, 177, 111);
+}
+/*FIN FILEROW*/
+
+.file-header {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  margin: 2vh auto;
+  font-size: 40px;
+  border-radius: 10px;
+  align-items: center;
+  color: rgb(241, 241, 241);
+  background-color: #353535d2;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.files-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin: 2vh auto;
+  margin-bottom: 0px;
+  max-height: 52vh;
+  background-color: #313131d2;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.upload-file-container {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 20px;
+  font-size: 20px;
+  font-family: "Console", monospace;
+  max-height: 52vh;
+  background-color: #313131d2;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+/*   .files-new-file {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    min-width: 60%;
+    border-radius: 10px;
+    background-color: rgb(161, 137, 228);
+    box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    transition: 0.3s;
+  } */
+
+.files-new-file2 {
+  font-family: "Major Mono Display", monospace;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  min-width: 60%;
+  border-radius: 10px;
+  background-color: rgb(161, 137, 228);
+  box-shadow: rgb;
+}
+
+.file-container {
+  min-height: 20px;
+}

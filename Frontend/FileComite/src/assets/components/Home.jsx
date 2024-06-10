@@ -6,6 +6,7 @@ import { FileRows } from '../common/FileRows';
 import { UploadFile } from '../common/UploadFile';
 import { SearchMeeting } from '../components/SearchMeeting'; // Asumiendo que tienes este componente
 import { InfoAndTutorials } from '../components/InfoAndTutorials'; // Asumiendo que tienes este componente
+/* import { CreateMeetingForm } from '../components/form' */
 
 export const Home = () => {
   const [selectedServer, selectServer] = useState();
@@ -42,7 +43,7 @@ export const Home = () => {
       case 'InfoAndTutorials':
         return <InfoAndTutorials />;
       default:
-        return null;
+        return <NewMeeting /> ;
     }
   };
 
@@ -106,7 +107,9 @@ export const Home = () => {
           </div>
         </div>
       </div>
+     {/*  {CreateMeetingForm()} */}
       </div>
     </>
   );
-};
+  };
+  

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors');
 const fileRouter = require("./src/routes/file.router");
 const authRouter = require("./src/routes/user.router");
 const meetingRouter = require("./src/routes/meeting.router");
@@ -11,7 +12,9 @@ require("dotenv").config();
 
 const app = express();
 
+
 // Middlewares
+app.use(cors({ origin:'http://localhost:5174'}));
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
