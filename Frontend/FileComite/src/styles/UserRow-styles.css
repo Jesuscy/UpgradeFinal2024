@@ -28,6 +28,14 @@
     padding: 10px 10px;
 }
 
+.user-profile strong {
+    overflow: hidden; /* Oculta el contenido que se desborda */
+    text-overflow: ellipsis; /* Añade puntos suspensivos (...) si el texto es demasiado largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    max-width: calc(100% - 60px); /* Establece el ancho máximo del strong */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total del elemento */
+}
+
 .user-profile img{
     max-width: 50px;
     max-height: 50px;

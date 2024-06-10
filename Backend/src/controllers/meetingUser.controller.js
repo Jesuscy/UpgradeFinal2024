@@ -1,16 +1,18 @@
 const {MeetingUser} = require('../models/meetingUser.model')
+const User = require('../models/user.model')
 const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 const mongoose = require('mongoose')
 
+
 const getMeetingUsers = async (req, res) => {
   try {
-    const { meetingId } = req.body
-    const meetingUsers = await MeetingUser.find({ meetingId: meetingId }).populate('User')
-    return res.status(200).json(meetingUsers)
+      const { meetingId } = req.body;
+      const meetingUsers = await MeetingUser.find({ meetingId: meetingId })
+      return res.status(200).json(meetingUsers);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching users' })
+      return res.status(500).json({ message: 'Error fetching users' });
   }
-}
+};
 
 const getMeetingUserById = async (req, res) => {
   try {

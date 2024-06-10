@@ -3,6 +3,25 @@ const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 
 //Funciones Crud
 
+const getUserById = async (req, res, next) => {
+    try {
+        //Obtiene el usuario con el mail
+        const {userId} = req.body
+        const user = await User.findById(userId)
+        if (user) {
+            res.status(201).json({
+                status: 201,
+                message: HTTPSTATUSCODE[201],
+                user: user
+            })
+        }
+
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
 const getUser = async (req, res, next) => {
     try {
         //Obtiene el usuario con el mail
@@ -153,4 +172,4 @@ const logoutUser = (req, res, next) => {
 };
 
 
-module.exports = { getUser, getUsers, createUser, deleteUser, logUser, logoutUser }
+module.exports = {getUserById, getUser, getUsers, createUser, deleteUser, logUser, logoutUser }
