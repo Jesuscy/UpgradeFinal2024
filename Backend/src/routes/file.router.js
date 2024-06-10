@@ -4,6 +4,6 @@ const {getFilesByMeeting, createFile} = require('../controllers/file.controller'
 const {upload} = require('../middleware/upload.file');
 
 fileRouter.get("/download");
-fileRouter.post("/upload", upload.single("filecontent"), createFile);
+fileRouter.post("/upload",createFile);
 
 module.exports = fileRouter;
