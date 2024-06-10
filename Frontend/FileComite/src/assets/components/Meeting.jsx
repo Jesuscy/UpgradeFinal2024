@@ -6,6 +6,8 @@ import SelectUserRole from "../common/SelectUserRole.jsx";
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
 import axios from "axios";
+import CheckAuth from "./Auth.jsx";
+
 
 export const Meeting = (props) => {
     const navigate = useNavigate();
@@ -81,6 +83,7 @@ export const Meeting = (props) => {
     };
     return (
         <>
+            <CheckAuth />
             <Header />
             {meeting ?
                 <div className="container meeting-container">
