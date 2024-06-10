@@ -19,7 +19,7 @@ export const Meeting = (props) => {
     const meetingId = location.state;
     const { token } = useContext(AuthContext);
     
-    if (token) {
+    if (!token) {
         navigate('/login');
     }
     const [meeting, setMeeting] = useState('');
