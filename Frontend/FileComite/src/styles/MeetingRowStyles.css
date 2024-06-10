@@ -3,10 +3,11 @@
 
 /*INICIO FILEROWS*/
 
-.file-header{
+
+.meetings-header{
   display: flex;
   flex-direction: column;
-  padding: 40px;  
+  padding:20px;  
   margin: 2vh auto;
   font-size: 40px;
   border-radius: 10px;
@@ -16,7 +17,7 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
 
-.files-container {
+.meetings-container {
   display: flex;
   flex-direction: column;
   padding: 40px;  
@@ -24,42 +25,12 @@
   border-top-left-radius: 10px;
   margin: 2vh auto;
   margin-bottom: 0px;
-  max-height: 52vh;
   background-color: #313131d2;
   overflow-y: scroll;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
 
-.upload-file-container {
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 20px;
-  font-size: 20px;
-  font-family: 'Console', monospace;
-  max-height: 52vh;
-  background-color: #313131d2;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-}
 
-.files-new-file {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
-  font-size: 20px;
-  min-width: 60%;
-  border-radius: 10px;
-  background-color: rgb(161, 137, 228);
-  box-shadow: rgba(150, 150, 150, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-  transition: 0.3s;
-}
-
-.files-new-file:hover {
-  background-color: rgb(144, 115, 224);
-}
-
-/*FIN FILEROWS*/
 
 /*INICIO FILEROW*/
 .files-header{

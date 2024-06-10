@@ -22,7 +22,13 @@ const meetingId = '664e1d52aedc946ee7634031'
 const getFiles = async () =>{
     try{
 
-        const response = await axios.post('http://127.0.0.1:3333/file/files', { meetingId })
+        const response = await axios.post('http://127.0.0.1:3333/file/files', { meetingId },{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        )
         setFiles(response.data.files)   
 
     }catch(error){
