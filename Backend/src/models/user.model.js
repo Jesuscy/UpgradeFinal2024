@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rol: [{type:String}],
-  
+  /* rol: [{type:String}], el usuario no tiene rol principal, sino que va pòr meetings
+   */
   meetings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Metting' }] 
 
 });

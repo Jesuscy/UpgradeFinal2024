@@ -14,8 +14,9 @@
 /*HEADER STYLES*/
 .header {
   display: flex;
-  text-align: center;
+  justify-content: space-between;
   align-items: center;
+  text-align: center;
   font-family: "Major Mono Display", monospace;
   font-weight: 400;
   font-style: normal;
@@ -25,6 +26,19 @@
     rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px,
     rgb(255, 85, 85) 0px 0px 0px 15px;
   margin: 15px;
+}
+
+.mini-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  font-size: 30px; /* Ajusta el tamaño de fuente si es necesario */
+}
+
+.mini-menu img {
+  width: 50px;
+  height: 50px;
 }
 
 /*HEADERS ENDS*/
