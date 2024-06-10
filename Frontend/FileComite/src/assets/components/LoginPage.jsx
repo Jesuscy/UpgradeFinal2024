@@ -1,22 +1,16 @@
-
-
-import React, { useState } from 'react';
-<<<<<<< HEAD
-import axios from 'axios'
-import '../../styles/LoginStyles.css'
-
-
-=======
+import React, { useContext,useState } from 'react';
 import axios from 'axios';
 import { Header } from '../common/Header';
+import { AuthContext } from './Auth.jsx';
 import '../../styles/LoginStyles.css';
->>>>>>> Users
+
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const { login } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +31,7 @@ const LoginPage = () => {
 
                 // Almacena el token en sessionStorage
                 sessionStorage.setItem('token', token);
-
+                login(token)
                 // Verificar el token (opcional, dependiendo de la lógica de tu aplicación)
                 verifyToken(token);
             } else {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext,useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../common/Header";
 import UserRows from "../common/UserRows.jsx";
@@ -6,8 +6,8 @@ import SelectUserRole from "../common/SelectUserRole.jsx";
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
 import { useLocation } from 'react-router-dom';
+import { AuthContext } from './Auth.jsx';
 import axios from "axios";
-import CheckAuth from "./Auth.jsx";
 
 
 
@@ -17,8 +17,11 @@ export const Meeting = (props) => {
     const [renderOption, setRenderOption] = useState('');
     const location = useLocation();
     const meetingId = location.state;
-    console.log('Data desde meeting' + meetingId);
-
+    const { token } = useContext(AuthContext);
+    
+    if (token) {
+        navigate('/login');
+    }
     const [meeting, setMeeting] = useState('');
     const [usersMeeting, setUsersMeeting] = useState([]);
 
@@ -89,7 +92,6 @@ export const Meeting = (props) => {
     };
     return (
         <>
-            <CheckAuth />
             <Header />
             {meeting ?
                 <div className="container meeting-container">
