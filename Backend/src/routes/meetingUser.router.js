@@ -6,5 +6,4 @@ meetingUserRouter.post('/meetingId/users', getMeetingUsers)
 
 
 
-
 module.exports = meetingUserRouter

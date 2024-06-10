@@ -9,6 +9,19 @@ export const UploadFile = (props) => {
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
 
+    //ELIMINAR LUEGO
+    const meetingId = '664e1d52aedc946ee7634031'
+
+    const toBase64 = (file) =>{
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = error => reject(error)
+        });
+    }
+    
+    
     const handleButtonClick = () => {
         fileInputRef.current.click()
     };
@@ -28,24 +41,32 @@ export const UploadFile = (props) => {
         if (!selectedFile) {
             alert('First select a file.')
             return
+        }   
+        const fileTo64 = await toBase64(selectedFile)
+        
+        
+        const data = {
+            filename: selectedFile.name,
+            meetingId: meetingId,
+            rol:'file-rol',
+            file:fileTo64
         }
-        const formData = new FormData()
-        formData.append('file', selectedFile)
-
-        try {
-            axios.post('http://127.0.0.1:3333/file/upload', formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }})
-
-        }
-        catch(error){
+               
+        try{
+            console.log('Mando Peticion')
+            await axios.post('http://127.0.0.1:3333/file/upload', {data},{
             
+            },{
+
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                } 
+            })
+            alert('Archivo subido con éxito')
+            toogleShowUpload()
+        }catch (error) {
+            console.log(error);
         }
-
-
-
     }
 
     return (
@@ -53,7 +74,7 @@ export const UploadFile = (props) => {
             <div className="upload-file">
                 <div className="row"><h2>UPLOAD NEW FILE</h2></div>
                 <div className="file-name-placeholder">
-                    FileName-example
+                    {selectedFile ?  selectedFile.name : 'Select File'} 
                 </div>
                 <div className="row">
                     <button onClick={handleButtonClick}>Select file</button>
@@ -64,9 +85,9 @@ export const UploadFile = (props) => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <div className="row"><button>Upload</button></div>
+                <div className="row"><button onClick={handleFileUpload}>Upload</button></div>
                 <div className="row close"><button onClick={toogleShowUpload}>Close</button></div>
             </div>
         </div>
     );
-};
+}
