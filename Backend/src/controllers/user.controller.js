@@ -4,6 +4,25 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 //Funciones Crud
 
+const getUserById = async (req, res, next) => {
+    try {
+        //Obtiene el usuario con el mail
+        const {userId} = req.body
+        const user = await User.findById(userId)
+        if (user) {
+            res.status(201).json({
+                status: 201,
+                message: HTTPSTATUSCODE[201],
+                user: user
+            })
+        }
+
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
 const getUser = async (req, res, next) => {
     try {
         //Obtiene el usuario con el mail

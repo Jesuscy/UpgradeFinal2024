@@ -1,9 +1,10 @@
 const express = require('express')
 const authRouter = express.Router()
-const {getUser,getUsers, logUser, createUser, deleteUser, logoutUser, userIsAuth} = require('../controllers/user.controller')
+const {getUserById, getUser,getUsers, logUser, createUser, deleteUser, logoutUser, userIsAuth} = require('../controllers/user.controller')
 
 
 //Obtener Usuarios.
+authRouter.get("/userId", getUserById)
 authRouter.get("/user", getUser)
 authRouter.get("/users", getUsers)
 authRouter.post("/verify", userIsAuth)

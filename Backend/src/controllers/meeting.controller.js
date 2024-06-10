@@ -3,7 +3,8 @@ const meetingRouter = require('../routes/meeting.router')
 const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 const mongoose = require('mongoose')
 
-const {createMeetingUser,deleteMeetingUser,updateMeetingUser} = require('./meetingUser.controller')
+const { createMeetingUser, deleteMeetingUser, updateMeetingUser } = require('./meetingUser.controller')
+const { MeetingUser } = require('../models/meetingUser.model')
 //Obtener Meeting
 const getMeeting = async (req, res, next) => {
     try {
@@ -161,13 +162,13 @@ const addUserMeeting = async (req, res, next) => {
             return res.status(404).json({ message: 'Meeting id not found' })
         }
         const userExists = meetingToMod.meetingUsers.some(user => user.userId.toString() === userId)
-        
+
         if (userExists) {
             return res.status(400).json({ message: 'User already in the meeting' })
         }
         //Creo Objeto con la estructura de meetingUser y lo sumo al array
-       
-        
+
+
         const newMeetingUserOrError = await createMeetingUser(meetingId, userId, roles)
         if (typeof newMeetingUserOrError === 'string') {
             return res.status(500).json({ message: newMeetingUserOrError })
@@ -191,7 +192,7 @@ const delUserMeeting = async (req, res, next) => {
         if (!meetingToMod) {
             return res.status(404).json({ message: 'Meeting id not found' });
         }
-        meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user => user.userId.toString() != userId )
+        meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user => user.userId.toString() != userId)
         console.log(meetingToMod.meetingUsers)
         await deleteMeetingUser(meetingId, userId)
         await meetingToMod.save();
@@ -205,22 +206,27 @@ const delUserMeeting = async (req, res, next) => {
 //Obtener users del meetings 
 const getMeetingUsers = async (req, res) => {
     try {
-      const { meetingId } = req.body;
-  
-      const meeting = await Meeting.findById(meetingId).populate({
-        path: 'meetingUsers.userId',
-        model: 'User'
-      })
-  
-      if (!meeting) {
-        return res.status(404).json({ message: 'Meeting not found' })
-      }
-  
-      res.json(meeting.meetingUsers);
+        const { meetingId } = req.body;
+
+        const meeting = await Meeting.findById(meetingId).populate({
+            path: 'meetingUsers.userId',
+            model: 'User'
+        })
+
+        const users = await MeetingUser.find({ meetingId: meetingId }).populate('userId')
+        if (!meeting) {
+            return res.status(404).json({ message: 'Meeting not found' })
+        }
+
+        res.json({
+            meeting,
+            meetingUsers: users
+        });
+
     } catch (error) {
-      res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
-  }
+}
 
 // Añadir un rol a usuario.
 const addRoleToMeetingUser = async (req, res) => {
@@ -265,4 +271,4 @@ const delRoleFromMeetingUser = async (req, res) => {
 }
 
 
-module.exports = { getMeeting, getMeetings, createMeeting, deleteMeeting, editMeeting, getUserMeetings, getMeetingUsers, addUserMeeting, delUserMeeting, addRoleToMeetingUser, delRoleFromMeetingUser}
+module.exports = { getMeeting, getMeetings, createMeeting, deleteMeeting, editMeeting, getUserMeetings, getMeetingUsers, addUserMeeting, delUserMeeting, addRoleToMeetingUser, delRoleFromMeetingUser }
