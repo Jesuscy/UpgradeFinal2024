@@ -15,10 +15,22 @@ const {meetingUserSchema} = require('./meetingUser.model')
     meetingUsers: [meetingUserSchema]
   });
 
+  meetingSchema.methods.getMeetingsByUserId = async function(userId) {
+    try {
+      const meetings = await this.find({'meetingUsers.userId': userId}).populate('meetingUsers.userId');
+      return meetings;
+    } catch (error) {
+      throw new Error('Error retrieving meetings by user ID');
+    }
+  }
 
   const Meeting = mongoose.model('Meeting',meetingSchema,'meetings');
 
   
+
+
+  
+
 
 meetingSchema.methods.addRoleToUser = async (userId, rol) =>{
   const user = await meetingUserSchema.find(meetingUser => meetingUser.userId.toString() === userId.toString())

@@ -127,29 +127,26 @@ const editMeeting = async (req, res, next) => {
 
     }
 }
-
-//Obtener meetings del user
 const getUserMeetings = async (req, res, next) => {
     try {
-        const userId = req.body
-        const meetings = await Meeting.find({ meetingUsers: userId })
-        if (meetings) {
-            res.status(200).json({
-                status: 200,
-                message: "User Meetings",
-                meetings: meetings
-            })
+        const userId = req.params.userId; // Extraer userId de los parámetros de la URL
+        const meetings = await Meeting.find({ 'meetingUsers.userId': userId }).populate('meetingUsers.userId');
+
+        if (meetings.length > 0) {
+            res.status(200).json({ meetings: meetings });
+        } else {
+            res.status(404).json({ message: "No meetings found for the user" });
         }
-    }
-    catch (error) {
-        next(error)
+    } catch (error) {
+        next(error);
         res.status(500).json({
             status: 500,
             message: "Internal Server Error",
             error: error.message
-        })
+        });
     }
-}
+};
+
 
 //Añadir user al meeting.
 const addUserMeeting = async (req, res, next) => {
