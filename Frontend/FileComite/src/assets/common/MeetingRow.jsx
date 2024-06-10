@@ -1,17 +1,24 @@
 import React from 'react'
 import '../../styles/MeetingRowStyles.css'
-import download from '/img/download-file-icon.png'
+import enter from '/img/enter-meeting-icon.png'
+import { Link } from 'react-router-dom';
 
-export const MeetingRow = () => {
+export const MeetingRow = (props) => {
+    const meeting = props.data
+    const meetingId = meeting.meetingId
+    
   return (
     <div className='row meeting-container'>
     
-    <div className="col meeting-spec">{'das'}</div>
-    <div className="col meeting-spec">{'dasd'}</div>
-    <div className="col meeting-spec">{'asd'}</div>
-    <div className="col meeting-spec meeting-actions">
+    <div className="col-md-3 meeting-spec">{"Name: " + meeting.meetingName}</div>
+    <div className="col-md-3  meeting-long-spec"><p>{meeting.meetingRoles+'.'}</p></div>
+    <div className="col-md-3  meeting-spec">{"Users: " +meeting.meetingUsers.length}</div>
+    <div className="col-md-3  meeting-spec meeting-actions">
         <button>
-            <img src={download} alt="Download File"/>
+        <Link to="/meeting" state={meetingId} style={{ textDecoration: 'none', color: 'black' }}>
+
+            <img src={enter} alt="Go to meeting"/>
+        </Link>
         </button>
     </div>
 </div>  )

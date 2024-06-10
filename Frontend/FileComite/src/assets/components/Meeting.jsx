@@ -6,11 +6,17 @@ import SelectUserRole from '../common/SelectUserRole.jsx';
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
 import UserRows from "../common/UserRows.jsx";
+import { useLocation } from 'react-router-dom';
+
 
 export const Meeting = (props) => {
     const navigate = useNavigate(); // Obtener la instancia de navigate
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
+    const location = useLocation();
+    const data = location.state;
+    console.log('Data desde meeting' + data);
+
 
     const handleShowSelectUserRole = () => {
         setShowSelectUserRole(true);
