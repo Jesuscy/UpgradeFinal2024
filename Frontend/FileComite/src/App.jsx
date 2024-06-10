@@ -5,13 +5,16 @@ import { Home } from './assets/components/Home'
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from './assets/components/LoginPage';
 import RegisterPage from './assets/components/RegisterPage';
-
+import { UserContext } from "../userContext";
 function App() {
+
+  /* const contentUser = UserContext(); */
 
   
 
   return (
     <>
+      {/* <UserContext.Provider value={contentUser}> */}
       <Router>
 
         <Routes>
@@ -23,6 +26,7 @@ function App() {
         </Routes>
 
       </Router>
+   {/*    </UserContext.Provider> */}
 
     </>
   )

@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+/* import { useHistory } from 'react-router-dom'; */
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const CheckAuth = () => {
     const [authChecked, setAuthChecked] = useState(false);
     const [authError, setAuthError] = useState(false);
-    const history = useHistory();
 
+    const navigate = useNavigate();
+
+   /*  const history = useHistory();
+ */
+
+       /*  const checkToken = () */
     useEffect(() => {
         const checkAuth = async () => {
             const token = sessionStorage.getItem('token');
+            console.log(token);
             if (!token) {
                 setAuthError(true);
                 return;
+                
             }
 
             try {
-                const response = await axios.post('/userIsAuth', { token });
+                const response = await axios.post('http://127.0.0.1:3333/user/userIsAuth', { token });
                 if (response.data.isAuthenticated) {
                     setAuthChecked(true);
                 } else {
@@ -28,7 +36,7 @@ const CheckAuth = () => {
         };
 
         checkAuth();
-    }, []);
+    }, );
 
     if (authError) {
         return (
@@ -39,13 +47,13 @@ const CheckAuth = () => {
     }
 
     if (!authChecked) {
-        return <p>Loading...</p>;
+        return <p>Cargando...</p>;
     }
 
     return (
         <div>
-            {/* Render your protected content here */}
-            <h1>Welcome to the protected page!</h1>
+            
+            <h1>Bienvenido!</h1>
         </div>
     );
 };
