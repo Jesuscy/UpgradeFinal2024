@@ -5,18 +5,23 @@ import UserRows from "../common/UserRows.jsx";
 import SelectUserRole from "../common/SelectUserRole.jsx";
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 
 export const Meeting = (props) => {
     const navigate = useNavigate();
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
+    const location = useLocation();
+    const meetingId = location.state;
+    console.log('Data desde meeting' + meetingId);
+
     const [meeting, setMeeting] = useState('');
     const [usersMeeting, setUsersMeeting] = useState([]);
 
     const fetchMeetingData = async () => {
         try {
-            const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId: '664e1d52aedc946ee7634031' });
+            const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId });
             setMeeting(meeting);
             setUsersMeeting(meeting.meetingUsers)
         } catch (error) {

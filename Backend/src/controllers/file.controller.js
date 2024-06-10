@@ -4,10 +4,12 @@ const mongoose = require("mongoose");
 const cloudinary = require("../middleware/upload.file")
 
 
-const getFilesByMeeting = async (req, res) => {
+
+ const getFilesByMeeting = async (req, res) => {
     try {
-        const meetingId = req.body
-        const objectId = mongoose.Types.ObjectId(meetingId)
+        const {meetingId} = req.body
+
+        const objectId = new mongoose.Types.ObjectId(meetingId)
 
         const files = await File.find({ 'meetingData.meetingId': objectId })
         if (files.length === 0) {
@@ -20,34 +22,8 @@ const getFilesByMeeting = async (req, res) => {
     catch (error) {
         res.status(500).json({ message: 'Error retrieving files' })
     }
-}
+} 
 
-/* const createFile = async (req,res,next) =>{
-    const {filename, meetingId, rol, file} = req.body
-    console.log(filename,meetingId,rol,file)
-    try{
-        const {filename, meetingId, rol, file} = req.body
-
-        const result = cloudinary.uploader.upload(file, {
-            folder: Files
-        })
-        const newFile = new File({
-            filename: filename,
-            meetingData:{
-                meetingId: meetingId,
-                rol: rol
-            },
-            filepath: (await result).secure_url
-        })
-
-        return res.status(201).json(newFile)
-    }
-    catch(error){
-        return res.status(500).json({message: 'Error creating file'})
-
-    }
-}
- */
 
 const createFile = async (req, res, next) => {
     try {
@@ -56,7 +32,8 @@ const createFile = async (req, res, next) => {
 
 
         const result = await cloudinary.uploader.upload(file, {
-            folder: 'Files' // Asegúrate de que 'Files' sea una cadena y no una variable sin definir
+            folder: 'Files', 
+            resource_type: 'auto'
         });
 
         const newFile = new File({
@@ -68,6 +45,7 @@ const createFile = async (req, res, next) => {
             filepath: result.secure_url
         });
 
+        newFile.save()
         return res.status(201).json(newFile);
     } catch (error) {
         console.error(error);

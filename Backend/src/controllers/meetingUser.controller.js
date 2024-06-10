@@ -12,7 +12,17 @@ const getMeetingUsers = async (req, res) => {
   } catch (error) {
       return res.status(500).json({ message: 'Error fetching users' });
   }
-};
+}
+const getUserMeetings = async (req, res) => {
+  try {
+    const { userId } = req.body
+    const userMeetings = await MeetingUser.find({ userId: userId }).populate('meetingId').populate('userId');
+    return res.status(200).json(userMeetings)
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching meetings' })
+  }
+
+}
 
 const getMeetingUserById = async (req, res) => {
   try {
@@ -64,4 +74,4 @@ const updateMeetingUser = async (req, res) => {
   }
 }
 
-module.exports = { getMeetingUsers, getMeetingUserById, createMeetingUser, deleteMeetingUser, updateMeetingUser }
+module.exports = { getMeetingUsers, getUserMeetings, getMeetingUserById, createMeetingUser, deleteMeetingUser, updateMeetingUser }
