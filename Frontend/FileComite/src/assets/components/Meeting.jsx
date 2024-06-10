@@ -1,25 +1,41 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../common/Header";
-import UserRow from '../common/UserRow.jsx';
-import SelectUserRole from '../common/SelectUserRole.jsx';
+import UserRows from "../common/UserRows.jsx";
+import SelectUserRole from "../common/SelectUserRole.jsx";
 import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
 import UserRows from "../common/UserRows.jsx";
 import { useLocation } from 'react-router-dom';
-
+import axios from "axios";
 
 export const Meeting = (props) => {
-    const navigate = useNavigate(); // Obtener la instancia de navigate
+    const navigate = useNavigate();
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
     const location = useLocation();
     const data = location.state;
     console.log('Data desde meeting' + data);
 
+    const [meeting, setMeeting] = useState('');
+    const [usersMeeting, setUsersMeeting] = useState([]);
+
+    const fetchMeetingData = async () => {
+        try {
+            const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId: '664e1d52aedc946ee7634031' });
+            setMeeting(meeting);
+            setUsersMeeting(meeting.meetingUsers)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchMeetingData();
+    }, []);
 
     const handleShowSelectUserRole = () => {
-        setShowSelectUserRole(true);
+        showSelectUserRole ? setShowSelectUserRole(false) : setShowSelectUserRole(true);
     };
 
     const handleHideSelectUserRole = () => {
@@ -30,7 +46,7 @@ export const Meeting = (props) => {
         setRenderOption(option);
     };
 
-    const renderComponent = () => {
+    const renderComponent = ({meetingData}) => {
         switch (renderOption) {
             case 'Role':
                 return <FileRows data={{ option: 'role', meetingName: 'meeting' }} />;
@@ -41,7 +57,7 @@ export const Meeting = (props) => {
                     <>
                         <div className="row box__meetings-title">
                             <div className="col-md-12 col-sm-12 col-xs-12">
-                                <h1>MEETING TITLE</h1>
+                                <h1>Meeting: {meetingData.meetingName}</h1>
                             </div>
                         </div>
                         <div className="row meetings-select">
@@ -58,7 +74,7 @@ export const Meeting = (props) => {
                         </div>
                         <div className="row">
                             <div className="col-md-12 col-sm-12 col-xs-12 box__meetings-back">
-                                <button className='meetings-back__button' onClick={handleBackClick}>Back</button> {/* Añadir onClick */}
+                                <button className='meetings-back__button' onClick={handleBackClick}>Back</button>
                             </div>
                         </div>
                     </>
@@ -67,38 +83,39 @@ export const Meeting = (props) => {
     };
 
     const handleBackClick = () => {
-        navigate('/'); // Navegar a la ruta de inicio
+        navigate('/');
     };
-
     return (
         <>
             <Header />
-
-            <div className="container meeting-container">
-                <div className="meeting-content">
-                    <div className="row meetings__users-content">
-                        <div className="col-md-3 col-sm-12 col-xs-12 meetings-users">
-                            <div className="row meetings__user-list">
-                                <div className="col-md-12 col-sm-12 col-xs-12 user-title">
-                                    <h1>USERS</h1>
-                                </div>
-                                <div className="user-overflow">
-                                    <div className="col-md-12 col-sm-12 col-xs-12 user-rows">
-                                        {/* Renderizando UserRows para mostrar la lista de usuarios */}
-                                        <UserRows onRoleClick={handleShowSelectUserRole} />
+            {meeting ?
+                <div className="container meeting-container">
+                    <div className="meeting-content">
+                        <div className="row meetings__users-content">
+                            <div className="col-md-3 col-sm-12 col-xs-12 meetings-users">
+                                <div className="row meetings__user-list">
+                                    <div className="col-md-12 col-sm-12 col-xs-12 user-title">
+                                        <h1>USERS</h1>
+                                    </div>
+                                    <div className="user-overflow">
+                                        <div className="col-md-12 col-sm-12 col-xs-12 user-rows">
+                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onRoleClick={handleShowSelectUserRole} updateUsersState={setUsersMeeting}/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
-                            <div>
-                                {renderComponent()}
+                            <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
+                                <div>
+                                {renderComponent({ meetingData: meeting.meeting })}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {showSelectUserRole && <SelectUserRole onClose={handleHideSelectUserRole} />} {/* Render condicional */}
+                : <h1>Loading...</h1>
+            }
+            {showSelectUserRole && <SelectUserRole onAccept={handleHideSelectUserRole} onClose={handleHideSelectUserRole} meeting={meeting.meeting}/>} 
         </>
     );
 };
+
