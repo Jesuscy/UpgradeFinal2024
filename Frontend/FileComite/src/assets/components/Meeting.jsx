@@ -7,6 +7,9 @@ import "../../styles/Meeting-styles.css";
 import { FileRows } from "../common/FileRows.jsx";
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
+import CheckAuth from "./Auth.jsx";
+
+
 
 export const Meeting = (props) => {
     const navigate = useNavigate();
@@ -86,6 +89,7 @@ export const Meeting = (props) => {
     };
     return (
         <>
+            <CheckAuth />
             <Header />
             {meeting ?
                 <div className="container meeting-container">

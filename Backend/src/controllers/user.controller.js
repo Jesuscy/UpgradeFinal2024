@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const HTTPSTATUSCODE = require('../utils/httpStatusCode')
-
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 //Funciones Crud
 
 const getUserById = async (req, res, next) => {
@@ -63,10 +64,11 @@ const getUsers = async (req, res, next) => {
     }
 }
 const createUser = async (req, res, next) => {
-  
+
     try {
         //Obtengo el mail y password.
-        const {mail, password} = req.body
+        const { mail, password } = req.body
+
         //Compruebo que no hayan usuarios con es mail.
         const existingUser = await User.findOne({ username: mail })
 
@@ -85,7 +87,7 @@ const createUser = async (req, res, next) => {
             username: mail,
             password: hassedPassword, // Store the hashed password
             salt: salt, // Store the salt value
-            rol: [],
+
             meetings: []
         })
         await user.save()
@@ -103,8 +105,8 @@ const createUser = async (req, res, next) => {
     }
 }
 const deleteUser = async (req, res, next) => {
-   
-    const {userId, password} = req.body
+
+    const { userId, password } = req.body
     //Obtengo user por id
     const user = await User.findById(userId)
 
@@ -125,7 +127,7 @@ const deleteUser = async (req, res, next) => {
 const logUser = async (req, res, next) => {
     try {
         //Obtengo Mail y Password 
-        const {mail, password} = req.body
+        const { mail, password } = req.body
         //Busco user en BD 
         const user = await User.findOne({ username: mail })
 
@@ -136,13 +138,17 @@ const logUser = async (req, res, next) => {
             })
         }
         //Comparo la password con la de la BD
-        const passwordMatch = bcrypt.compare(password, user.password)
+        const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            console.log('Mail o password incorrecta.')
+            return res.status(401).json({
+                status: 401,
+                message: "Incorrect password"
+            });
         }
-        //Genero el token y lo devuelvo en el json al forntend.
-        const token = jwt.sign({ email: user.email }, 'secretKey', { expiresIn: '1h' });
+        /*Genero el token y lo devuelvo en el json al forntend.*/
+
+        const token = jwt.sign({ email: user.email }, 's15646546846165168786465z', { expiresIn: '1h' }); /*clave privada de muestra, se tendria que meter en un archivo fuera del rep (.gitignore)*/
 
         //Devulevo el user.
         res.status(201).json({
@@ -171,5 +177,28 @@ const logoutUser = (req, res, next) => {
     });
 };
 
+/* const userIsAuth = (token) => {
 
-module.exports = {getUserById, getUser, getUsers, createUser, deleteUser, logUser, logoutUser }
+    try {
+        jwt.verify(token, 's15646546846165168786465z');
+        return true;
+    } catch (error) {
+        console.error('Token validation error:', error);
+        return false;
+    }
+} */
+        /* V2 para pages */
+    const userIsAuth = (req, res) => {
+        const { token } = req.body;
+    
+        try {
+            jwt.verify(token, 's15646546846165168786465z');
+            return res.json({ isAuthenticated: true });
+        } catch (error) {
+            console.error('Token validation error:', error);
+            return res.json({ isAuthenticated: false });
+        }
+    };
+
+
+module.exports = { getUserById, getUser, getUsers, createUser, deleteUser, logUser, logoutUser, userIsAuth }  
