@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Header } from '../common/Header';
 import { AuthContext } from './Auth.jsx';
@@ -11,6 +11,8 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const { login } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,6 +50,12 @@ const LoginPage = () => {
             setSuccess('');
         }
     };
+
+
+    const logOut = () => {
+        sessionStorage.clear()
+        logOut()
+    }
 
     const verifyToken = async (token) => {
         try {

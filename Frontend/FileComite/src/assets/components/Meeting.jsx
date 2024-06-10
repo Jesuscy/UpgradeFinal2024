@@ -21,6 +21,7 @@ export const Meeting = (props) => {
     
     if (!token) {
         navigate('/login');
+        alert('Primero inicia sesion');
     }
     const [meeting, setMeeting] = useState('');
     const [usersMeeting, setUsersMeeting] = useState([]);
