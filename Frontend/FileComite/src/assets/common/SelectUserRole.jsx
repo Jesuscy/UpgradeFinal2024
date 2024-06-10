@@ -1,24 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import axios from "axios";
 import "../../styles/SelectUserRole-styles.css";
 
 const SelectUserRole = (props) => {
+    const onAccept = async () => {
+        const select = document.querySelector('.form-select');
+        const selectedRole = select.options[select.selectedIndex].text;
+        
+        await axios.post('http://localhost:3333/meeting/add/rol', { meetingId: props.user.meetingId, userId: props.user.userId._id, rol: selectedRole })
+        const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId: props.user.meetingId });
+        props.setMeeting(meeting);
+        props.setUsersMeeting(meeting.meetingUsers)
+        props.onClose();
+    }  
+
     return (
-        props.meeting.meetingRoles && props.meeting.meetingRoles.length > 0 ? 
+        props.roles && props.roles.length > 0 ? 
         <div className="modal-overlay">
             <div className='role-selector'>
                 <div className="row"><h2>Select Role</h2></div>
                     <div className='row select-option'>                    
                         <select className="form-select" size="4" aria-label="Size 4 select example">
                             {
-                                props.meeting.meetingRoles.map((role, index) => (
-                                    <option value={index}>{role}</option>
+                                props.roles.map((role, index) => (
+                                    <option value={index} key={index}>{role}</option>
                                 ))
                             }
                         </select>
                     </div>
                     <div className='col-md-12 col-sm-12 col-xs-12 role-selector-buttons'>
-                        <button className='col-md-4 col-sm-4 col-xs-12 role-selector-button' onClick={props.onAccept}>Accept</button> {/* cambiar metodo onClose por metodo onAccept */}
+                        <button className='col-md-4 col-sm-4 col-xs-12 role-selector-button' onClick={onAccept}>Accept</button> {/* cambiar metodo onClose por metodo onAccept */}
                         <button className='col-md-4 col-sm-4 col-xs-12 role-selector-button' onClick={props.onClose}>Close</button>
                     </div>
                 </div>

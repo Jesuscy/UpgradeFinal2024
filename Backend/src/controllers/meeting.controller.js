@@ -238,9 +238,17 @@ const addRoleToMeetingUser = async (req, res) => {
         }
         const user = meeting.meetingUsers.find(user => user.userId.toString() === userId)
         if (user) {
-            user.roles.push(rol)
-            await meeting.save()
-            return res.status(200).json({ message: 'Role successfully added.' })
+            const userDB = await MeetingUser.findOne({ userId, meetingId })
+            const findRole = await userDB.roles.find(role => role === rol)
+            if (findRole) {
+                return res.status(400).json({ message: 'Role already assigned' })
+            }
+            if(!findRole){
+                await user.roles.push(rol)
+                await meeting.save()
+                await MeetingUser.findOneAndUpdate({ userId, meetingId }, { $push: { roles: rol }, new: true })
+                return res.status(200).json({ message: 'Role successfully added.' })
+            }
         } else {
             return res.status(404).json({ message: 'User not found in meeting' })
         }
