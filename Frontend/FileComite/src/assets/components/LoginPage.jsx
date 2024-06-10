@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import axios from 'axios'
 import '../../styles/LoginStyles.css'
 
 
@@ -12,47 +12,81 @@ const LoginPage = () => {
         e.preventDefault();
         alert(`Email: ${email}\nPassword: ${password}`);
     };
-    return (
 
-        <div className="col-md-12 col-sm-12 col-xs-12 container-login">
-            <h1>Login</h1>
-            
-            <div className="container create-meeting-form">
-        <div className='border-login'>
-        
-        <div className="container-login">
-            <h2>Ingresa tu correo y password:</h2>
-            <form onSubmit={handleSubmit} className="col-md-6">
-                <div className="form-group mb-3">
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group mb-3">
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">Login</button>
-            </form>
-        </div>
-        </div>
-        
-        </div>
-        </div>
 
-        
-    );
-};
+    const login = async (email, password) => {
+        try {
+            const response = await axios.post('/login', {
+                email,
+                password
+            });
+
+            if (response.status === 201) {
+                const { token } = response.data;
+                localStorage.setItem('token', token);
+                return response.data;
+            } else {
+                throw new Error(response.data.message);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            throw error;
+        }
+    };
+
+    const logout = () => {
+        localStorage.removeItem('token');
+    };
+
+    const isAuthenticated = () => {
+        return !!localStorage.getItem('token');
+    };
+
+
+
+}
+
+return (
+
+    <div className="col-md-12 col-sm-12 col-xs-12 container-login">
+        <h1>Login</h1>
+
+        <div className="container create-meeting-form">
+            <div className='border-login'>
+
+                <div className="container-login">
+                    <h2>Ingresa tu correo y password:</h2>
+                    <form onSubmit={handleSubmit} className="col-md-6">
+                        <div className="form-group mb-3">
+                            <label>Email:</label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group mb-3">
+                            <label>Password:</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button onClick={login} type="submit" className="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+)
+
 
 export default LoginPage;
