@@ -177,7 +177,7 @@ const logoutUser = (req, res, next) => {
     });
 };
 
-const userIsAuth = (token) => {
+/* const userIsAuth = (token) => {
 
     try {
         jwt.verify(token, 's15646546846165168786465z');
@@ -186,7 +186,19 @@ const userIsAuth = (token) => {
         console.error('Token validation error:', error);
         return false;
     }
-}
+} */
+        /* V2 para pages */
+    const userIsAuth = (req, res) => {
+        const { token } = req.body;
+    
+        try {
+            jwt.verify(token, 's15646546846165168786465z');
+            return res.json({ isAuthenticated: true });
+        } catch (error) {
+            console.error('Token validation error:', error);
+            return res.json({ isAuthenticated: false });
+        }
+    };
 
 
-module.exports = { getUser, getUsers, createUser, deleteUser, logUser, logoutUser, userIsAuth }  
+module.exports = { getUserById, getUser, getUsers, createUser, deleteUser, logUser, logoutUser, userIsAuth }  

@@ -12,6 +12,6 @@ authRouter.post("/log", logUser)
 authRouter.post("/logout", logoutUser)
 authRouter.post("/create", createUser)
 authRouter.post("/delete", deleteUser)
-
+authRouter.post('/userIsAuth', userIsAuth);
 
 module.exports = authRouter
