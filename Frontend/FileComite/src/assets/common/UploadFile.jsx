@@ -9,6 +9,9 @@ export const UploadFile = (props) => {
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
 
+    //ELIMINAR LUEGO
+    const meetingId = '664e1d52aedc946ee7634031'
+
     const toBase64 = (file) =>{
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
@@ -44,8 +47,8 @@ export const UploadFile = (props) => {
         
         const data = {
             filename: selectedFile.name,
-            meetingId: '664e1c51cc66cb7a785a7320',
-            rol:'Rol1',
+            meetingId: meetingId,
+            rol:'file-rol',
             file:fileTo64
         }
                
@@ -59,7 +62,8 @@ export const UploadFile = (props) => {
                     'Content-Type': 'multipart/form-data'
                 } 
             })
-            
+            alert('Archivo subido con éxito')
+            toogleShowUpload()
         }catch (error) {
             console.log(error);
         }

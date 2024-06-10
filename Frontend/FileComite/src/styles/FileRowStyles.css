@@ -23,6 +23,7 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   margin: 2vh auto;
+  min-height: 450px;
   margin-bottom: 0px;
   max-height: 52vh;
   background-color: #313131d2;
@@ -62,6 +63,7 @@
 /*FIN FILEROWS*/
 
 /*INICIO FILEROW*/
+
 .files-header{
   display: flex;
   padding: 20px;
