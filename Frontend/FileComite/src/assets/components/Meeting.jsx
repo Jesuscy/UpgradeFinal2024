@@ -43,21 +43,21 @@ export const Meeting = (props) => {
     };
 
     const getUserRolInMeeting = async () =>{
-        console.log('Meeting INFO QUE BUSCAS:', userId, meetingId)
 
         try {
-            const response = await axios.post('http://127.0.0.1:3333/api/getUserRoles', { userId, meetingId })
-            console.log('ROLES DE USER'+ response.data)
+            const response = await axios.post('http://127.0.0.1:3333/meetingUser/userId/roles',{ userId, meetingId })
+            setUserRoles(response.data.roles)
         } catch (error) {
-            console.error('Error fetching user roles:', error)
+            console.error(error);
         }
     }
-    
 
     useEffect(() => {
         fetchMeetingData();
         getUserRolInMeeting();
+
     }, []);
+
 
     const handleShowSelectUserRole = () => {
         showSelectUserRole ? setShowSelectUserRole(false) : setShowSelectUserRole(true);
