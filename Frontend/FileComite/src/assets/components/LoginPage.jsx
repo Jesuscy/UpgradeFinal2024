@@ -68,8 +68,7 @@ const LoginPage = () => {
             if (response.status === 200) {
                 setSuccess('Token válido y usuario autenticado.');
                 setError('');
-                // Redirigir o actualizar el estado de la aplicación según sea necesario
-                // window.location.href = '/dashboard'; // Ejemplo de redirección
+                
             } else {
                 setError('Token inválido.');
                 setSuccess('');

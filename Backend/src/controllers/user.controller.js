@@ -168,16 +168,6 @@ const logUser = async (req, res, next) => {
 }
 
 
-/* const userIsAuth = (token) => {
-
-    try {
-        jwt.verify(token, 's15646546846165168786465z');
-        return true;
-    } catch (error) {
-        console.error('Token validation error:', error);
-        return false;
-    }
-} */
         /* V2 para pages */
     const userIsAuth = (req, res) => {
         const { token } = req.body;
