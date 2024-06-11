@@ -9,7 +9,6 @@ authRouter.get("/user", getUser)
 authRouter.get("/users", getUsers)
 authRouter.post("/verify", userIsAuth)
 authRouter.post("/log", logUser)
-authRouter.post("/logout", logoutUser)
 authRouter.post("/create", createUser)
 authRouter.post("/delete", deleteUser)
 authRouter.post('/userIsAuth', userIsAuth);

@@ -52,10 +52,7 @@ const LoginPage = () => {
     };
 
 
-    const logOut = () => {
-        sessionStorage.clear()
-        logOut()
-    }
+    
 
     const verifyToken = async (token) => {
         try {
