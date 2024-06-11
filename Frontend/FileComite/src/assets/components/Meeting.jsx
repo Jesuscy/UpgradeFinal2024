@@ -1,4 +1,4 @@
-import React, { useContext,useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../common/Header";
 import UserRows from "../common/UserRows.jsx";
@@ -8,8 +8,7 @@ import { FileRows } from "../common/FileRows.jsx";
 import { useLocation } from 'react-router-dom';
 import { AuthContext } from './Auth.jsx';
 import axios from "axios";
-
-
+import AddUserMeeting from "../common/AddUserMeeting"; // Importa el componente
 
 export const Meeting = (props) => {
     const navigate = useNavigate();
@@ -20,47 +19,48 @@ export const Meeting = (props) => {
     const {meetingId} = location.state;
     const {meetingRoles} = location.state
     const { token } = useContext(AuthContext);
+    const [userMeeting, setUserMeeting] = useState();
+    const [usersMeeting, setUsersMeeting] = useState([]);
+    const [meeting, setMeeting] = useState('');
+    const [showAddUserMeeting, setShowAddUserMeeting] = useState(false); // Estado para controlar la visualización de AddUserMeeting
+
     const { userId } = useContext(AuthContext);
 
     
     if (!token) {
         navigate('/login');
-        alert('Primero inicia sesion');
+        alert('First Log In');
     }
-    const [userMeeting, setUserMeeting] = useState();
-
-    const [meeting, setMeeting] = useState('');
-    const [usersMeeting, setUsersMeeting] = useState([]);
 
     const fetchMeetingData = async () => {
         try {
             const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId });
             setMeeting(meeting);
-            setUsersMeeting(meeting.meetingUsers)
+            setUsersMeeting(meeting.meetingUsers);
         } catch (error) {
             console.error(error);
         }
     };
 
     const getUserRolInMeeting = async () =>{
-        console.log('Meeting INFO QUE BUSCAS:', userId, meetingId)
 
         try {
-            const response = await axios.post('http://127.0.0.1:3333/api/getUserRoles', { userId, meetingId })
-            console.log('ROLES DE USER'+ response.data)
+            const response = await axios.post('http://127.0.0.1:3333/meetingUser/userId/roles',{ userId, meetingId })
+            setUserRoles(response.data.roles)
         } catch (error) {
-            console.error('Error fetching user roles:', error)
+            console.error(error);
         }
     }
-    
 
     useEffect(() => {
         fetchMeetingData();
         getUserRolInMeeting();
+
     }, []);
 
+
     const handleShowSelectUserRole = () => {
-        showSelectUserRole ? setShowSelectUserRole(false) : setShowSelectUserRole(true);
+        setShowSelectUserRole(!showSelectUserRole);
     };
 
     const handleHideSelectUserRole = () => {
@@ -68,20 +68,31 @@ export const Meeting = (props) => {
     };
 
     const handleUserClick = (user) => {
-        // Do something with the clicked user
-        setUserMeeting(user)
+        setUserMeeting(user);
     };
 
     const handleSetRenderOption = (option) => {
         setRenderOption(option);
     };
 
-    const renderComponent = ({meetingData}) => {
+    const handleAddUsersClick = () => {
+        setShowAddUserMeeting(true); // Muestra el componente AddUserMeeting
+    };
+
+    const handleCloseAddUserMeeting = () => {
+        setShowAddUserMeeting(false); // Oculta el componente AddUserMeeting
+    };
+
+    const handleBackClick = () => {
+        navigate('/');
+    };
+
+    const renderComponent = ({ meetingData }) => {
         switch (renderOption) {
             case 'Role':
-                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId, meetingRoles: meetingRoles, userRoles: userRoles}} />;
+                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId, meetingRoles: meetingRoles, userRoles: userRoles , title:meetingData.meetingName}} />;
             case 'Meeting':
-                return <FileRows data={{ option: 'meeting', meetingName: 'meeting',meetingId: meetingId }} />;
+                return <FileRows data={{ option: 'meeting', meetingName: 'meeting', meetingId: meetingId, title:meetingData.meetingName}} />;
             default:
                 return (
                     <>
@@ -112,9 +123,6 @@ export const Meeting = (props) => {
         }
     };
 
-    const handleBackClick = () => {
-        navigate('/');
-    };
     return (
         <>
             <Header />
@@ -127,16 +135,19 @@ export const Meeting = (props) => {
                                     <div className="col-md-12 col-sm-12 col-xs-12 user-title">
                                         <h1>USERS</h1>
                                     </div>
+                                    <div className="col-md-12 col-sm-12 col-xs-12 add-users">
+                                        <button className="col-md-12 col-sm-12 col-xs-12" onClick={handleAddUsersClick}>Add Users</button>
+                                    </div>
                                     <div className="user-overflow">
                                         <div className="col-md-12 col-sm-12 col-xs-12 user-rows">
-                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onUserClick={handleUserClick} onRoleClick={handleShowSelectUserRole} updateUsersState={setUsersMeeting}/>
+                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onUserClick={handleUserClick} onRoleClick={handleShowSelectUserRole} updateUsersState={setUsersMeeting} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-md-9 col-sm-12 col-xs-12 meeting-box">
                                 <div>
-                                {renderComponent({ meetingData: meeting.meeting })}
+                                    {renderComponent({ meetingData: meeting.meeting })}
                                 </div>
                             </div>
                         </div>
@@ -144,7 +155,8 @@ export const Meeting = (props) => {
                 </div>
                 : <h1>Loading...</h1>
             }
-            {showSelectUserRole && <SelectUserRole user={userMeeting} onClose={handleHideSelectUserRole} roles={meeting.meeting.meetingRoles} setMeeting={setMeeting} setUsersMeeting={setUsersMeeting}/>} 
+            {showSelectUserRole && <SelectUserRole user={userMeeting} onClose={handleHideSelectUserRole} roles={meeting.meeting.meetingRoles} setMeeting={setMeeting} setUsersMeeting={setUsersMeeting} />}
+            {showAddUserMeeting && <AddUserMeeting data={{meetingId,userId}} setUsersMeeting={setUsersMeeting} onClose={handleCloseAddUserMeeting} />} {/* Renderiza el componente AddUserMeeting si showAddUserMeeting es verdadero */}
         </>
     );
 };

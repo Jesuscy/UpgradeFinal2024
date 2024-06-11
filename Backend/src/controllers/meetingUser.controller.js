@@ -28,10 +28,7 @@ const getUserRoles = async (req, res) => {
   console.log(userId, meetingId);
 
   try {
-    const meetingUser = await MeetingUser.findOne({
-      userId: new mongoose.Types.ObjectId(userId),
-      meetingId: new mongoose.Types.ObjectId(meetingId)
-    });
+    const meetingUser = await MeetingUser.findOne({userId:userId, meetingId:meetingId});
 
     if (!meetingUser) {
       return res.status(404).json({ message: 'Roles not found for the given userId and meetingId' });

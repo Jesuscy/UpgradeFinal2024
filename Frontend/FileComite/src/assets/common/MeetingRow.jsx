@@ -7,7 +7,6 @@ export const MeetingRow = (props) => {
     const meeting = props.data
     const meetingId = meeting.meetingId
     const meetingRoles = meeting.meetingRoles
-    console.log(meetingRoles)
     
   return (
     <div className='row meeting-container'>
