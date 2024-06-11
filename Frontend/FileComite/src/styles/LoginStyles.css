@@ -62,3 +62,8 @@ width: 100vi;
     font-size: 12px;
 
 }
+
+.alert {
+    font-family: 'Major Mono Display', monospace;
+    background-color: rgb(89,177,111);
+}

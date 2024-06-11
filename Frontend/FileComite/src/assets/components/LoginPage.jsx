@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Header } from '../common/Header';
 import { AuthContext } from './Auth.jsx';
 import '../../styles/LoginStyles.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
@@ -12,6 +13,7 @@ const LoginPage = () => {
     const [success, setSuccess] = useState('');
     const { login } = useContext(AuthContext);
     const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (e) => {
@@ -36,6 +38,8 @@ const LoginPage = () => {
                 login(token)
                 // Verificar el token (opcional, dependiendo de la lógica de tu aplicación)
                 verifyToken(token);
+
+                navigate('/');
             } else {
                 setError('Error en la autenticación.');
                 setSuccess('');

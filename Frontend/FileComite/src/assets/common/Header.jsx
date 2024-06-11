@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../components/Auth";
+
 
 
 
 export const Header = () => {
     const { token, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    }
     return (
         <>
             <div className="row header">
@@ -46,7 +53,7 @@ export const Header = () => {
                     {/* Show Logout only if there is a token */}
                     {token && (
                         <div className="col-md-12">
-                            <button onClick={logout} style={{ textDecoration: 'none', color: 'black', backgroundColor: '#9EE489'}}>
+                            <button onClick={handleLogout} style={{ textDecoration: 'none', color: 'black', backgroundColor: '#9EE489'}}>
                                 <h3>Logout</h3>
                             </button>
                         </div>
