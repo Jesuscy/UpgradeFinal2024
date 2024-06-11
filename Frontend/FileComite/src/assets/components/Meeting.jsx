@@ -23,6 +23,8 @@ export const Meeting = (props) => {
         navigate('/login');
         alert('Primero inicia sesion');
     }
+    const [userMeeting, setUserMeeting] = useState();
+
     const [meeting, setMeeting] = useState('');
     const [usersMeeting, setUsersMeeting] = useState([]);
 
@@ -46,6 +48,11 @@ export const Meeting = (props) => {
 
     const handleHideSelectUserRole = () => {
         setShowSelectUserRole(false);
+    };
+
+    const handleUserClick = (user) => {
+        // Do something with the clicked user
+        setUserMeeting(user)
     };
 
     const handleSetRenderOption = (option) => {
@@ -105,7 +112,7 @@ export const Meeting = (props) => {
                                     </div>
                                     <div className="user-overflow">
                                         <div className="col-md-12 col-sm-12 col-xs-12 user-rows">
-                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onRoleClick={handleShowSelectUserRole} updateUsersState={setUsersMeeting}/>
+                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onUserClick={handleUserClick} onRoleClick={handleShowSelectUserRole} updateUsersState={setUsersMeeting}/>
                                         </div>
                                     </div>
                                 </div>
@@ -120,8 +127,7 @@ export const Meeting = (props) => {
                 </div>
                 : <h1>Loading...</h1>
             }
-            {showSelectUserRole && <SelectUserRole onAccept={handleHideSelectUserRole} onClose={handleHideSelectUserRole} meeting={meeting.meeting}/>} 
+            {showSelectUserRole && <SelectUserRole user={userMeeting} onClose={handleHideSelectUserRole} roles={meeting.meeting.meetingRoles} setMeeting={setMeeting} setUsersMeeting={setUsersMeeting}/>} 
         </>
     );
 };
-
