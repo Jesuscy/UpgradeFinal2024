@@ -53,17 +53,16 @@ const getMeetings = async (req, res, next) => {
 //Crear Meeting
 const createMeeting = async (req, res, next) => {
     try {
-        const { name, path, roles, users } = req.body
-        const existingMeeting = await Meeting.find({ meetingName: name })
-        if (existingMeeting) {
+        const { name, roles, users } = req.body
+        /*   const existingMeeting = await Meeting.find({ meetingName: name })
+             if (existingMeeting != null) {
             return res.status(400).json({
                 status: 400,
                 message: "Meeting name already registered"
             })
-        }
+        } */
         const meeting = new Meeting({
             meetingName: name,
-            //meetingPath:
             meetingRoles: roles,
             meetingUser: users
         })
@@ -243,7 +242,7 @@ const addRoleToMeetingUser = async (req, res) => {
             if (findRole) {
                 return res.status(400).json({ message: 'Role already assigned' })
             }
-            if(!findRole){
+            if (!findRole) {
                 await user.roles.push(rol)
                 await meeting.save()
                 await MeetingUser.findOneAndUpdate({ userId, meetingId }, { $push: { roles: rol }, new: true })
