@@ -6,8 +6,7 @@ import { AuthContext } from "../components/Auth";
 
 
 export const Header = () => {
-    const { logout } = useContext(AuthContext);
-
+    const { token, logout } = useContext(AuthContext);
     return (
         <>
             <div className="row header">
@@ -29,27 +28,30 @@ export const Header = () => {
                     SHARE FILES
                 </div>
                 <div className='col-md-3 mini-menu'>
-
-                    <div className="col-md-4">
-                        <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
-                            <h3>Login</h3>
-                        </Link>
-                    </div>
-                    <div className="col-md-4">
-                        <Link to="/register" style={{ textDecoration: 'none', color: 'black' }}>
-                            <h3>Register</h3>
-                        </Link>
-                    </div>
-                    <div className="col-md-4">
-                        <button onClick={logout} style={{ textDecoration: 'none', color: 'black' }}>
-                            <h3>Logout</h3>
-                        </button>
-
-                    </div>
-
-
+                    {/* Show Login and Register only if there is no token */}
+                    {!token && (
+                        <>
+                            <div className="col-md-6">
+                                <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
+                                    <h3>Login</h3>
+                                </Link>
+                            </div>
+                            <div className="col-md-6">
+                                <Link to="/register" style={{ textDecoration: 'none', color: 'black' }}>
+                                    <h3>Register</h3>
+                                </Link>
+                            </div>
+                        </>
+                    )}
+                    {/* Show Logout only if there is a token */}
+                    {token && (
+                        <div className="col-md-12">
+                            <button onClick={logout} style={{ textDecoration: 'none', color: 'black' }}>
+                                <h3>Logout</h3>
+                            </button>
+                        </div>
+                    )}
                 </div>
-
 
 
 
