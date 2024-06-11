@@ -15,9 +15,13 @@ export const Meeting = (props) => {
     const navigate = useNavigate();
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
+    const [userRoles, setUserRoles] = useState([])
     const location = useLocation();
-    const meetingId = location.state;
+    const {meetingId} = location.state;
+    const {meetingRoles} = location.state
     const { token } = useContext(AuthContext);
+    const { userId } = useContext(AuthContext);
+
     
     if (!token) {
         navigate('/login');
@@ -38,8 +42,21 @@ export const Meeting = (props) => {
         }
     };
 
+    const getUserRolInMeeting = async () =>{
+        console.log('Meeting INFO QUE BUSCAS:', userId, meetingId)
+
+        try {
+            const response = await axios.post('http://127.0.0.1:3333/api/getUserRoles', { userId, meetingId })
+            console.log('ROLES DE USER'+ response.data)
+        } catch (error) {
+            console.error('Error fetching user roles:', error)
+        }
+    }
+    
+
     useEffect(() => {
         fetchMeetingData();
+        getUserRolInMeeting();
     }, []);
 
     const handleShowSelectUserRole = () => {
@@ -62,7 +79,7 @@ export const Meeting = (props) => {
     const renderComponent = ({meetingData}) => {
         switch (renderOption) {
             case 'Role':
-                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId}} />;
+                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId, meetingRoles: meetingRoles, userRoles: userRoles}} />;
             case 'Meeting':
                 return <FileRows data={{ option: 'meeting', meetingName: 'meeting',meetingId: meetingId }} />;
             default:

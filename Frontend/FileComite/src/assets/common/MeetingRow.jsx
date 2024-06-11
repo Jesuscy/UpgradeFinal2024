@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 export const MeetingRow = (props) => {
     const meeting = props.data
     const meetingId = meeting.meetingId
+    const meetingRoles = meeting.meetingRoles
+    console.log(meetingRoles)
     
   return (
     <div className='row meeting-container'>
@@ -15,7 +17,7 @@ export const MeetingRow = (props) => {
     <div className="col-md-3  meeting-spec">{"Users: " +meeting.meetingUsers.length}</div>
     <div className="col-md-3  meeting-spec meeting-actions">
         <button>
-        <Link to="/meeting" state={meetingId} style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to="/meeting" state={{meetingId, meetingRoles}} style={{ textDecoration: 'none', color: 'black' }}>
 
             <img src={enter} alt="Go to meeting"/>
         </Link>
