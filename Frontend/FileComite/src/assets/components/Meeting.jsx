@@ -19,10 +19,9 @@ export const Meeting = (props) => {
     const {meetingId} = location.state;
     const {meetingRoles} = location.state
     const { token } = useContext(AuthContext);
-
     const [userMeeting, setUserMeeting] = useState();
-    const [meeting, setMeeting] = useState('');
     const [usersMeeting, setUsersMeeting] = useState([]);
+    const [meeting, setMeeting] = useState('');
     const [showAddUserMeeting, setShowAddUserMeeting] = useState(false); // Estado para controlar la visualización de AddUserMeeting
 
     const { userId } = useContext(AuthContext);
@@ -30,7 +29,7 @@ export const Meeting = (props) => {
     
     if (!token) {
         navigate('/login');
-        alert('Primero inicia sesion');
+        alert('First Log In');
     }
 
     const fetchMeetingData = async () => {
@@ -91,9 +90,9 @@ export const Meeting = (props) => {
     const renderComponent = ({ meetingData }) => {
         switch (renderOption) {
             case 'Role':
-                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId, meetingRoles: meetingRoles, userRoles: userRoles}} />;
+                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId, meetingRoles: meetingRoles, userRoles: userRoles , title:meetingData.meetingName}} />;
             case 'Meeting':
-                return <FileRows data={{ option: 'meeting', meetingName: 'meeting', meetingId: meetingId }} />;
+                return <FileRows data={{ option: 'meeting', meetingName: 'meeting', meetingId: meetingId, title:meetingData.meetingName}} />;
             default:
                 return (
                     <>
@@ -157,7 +156,7 @@ export const Meeting = (props) => {
                 : <h1>Loading...</h1>
             }
             {showSelectUserRole && <SelectUserRole user={userMeeting} onClose={handleHideSelectUserRole} roles={meeting.meeting.meetingRoles} setMeeting={setMeeting} setUsersMeeting={setUsersMeeting} />}
-            {showAddUserMeeting && <AddUserMeeting onClose={handleCloseAddUserMeeting} />} {/* Renderiza el componente AddUserMeeting si showAddUserMeeting es verdadero */}
+            {showAddUserMeeting && <AddUserMeeting data={{meetingId,userId}} setUsersMeeting={setUsersMeeting} onClose={handleCloseAddUserMeeting} />} {/* Renderiza el componente AddUserMeeting si showAddUserMeeting es verdadero */}
         </>
     );
 };

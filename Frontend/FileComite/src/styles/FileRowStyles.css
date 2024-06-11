@@ -19,7 +19,6 @@
 .files-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 40px;  
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
