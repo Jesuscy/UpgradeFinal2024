@@ -1,4 +1,4 @@
-const {MeetingUser} = require('../models/meetingUser.model')
+const { MeetingUser } = require('../models/meetingUser.model')
 const User = require('../models/user.model')
 const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 const mongoose = require('mongoose')
@@ -6,11 +6,11 @@ const mongoose = require('mongoose')
 
 const getMeetingUsers = async (req, res) => {
   try {
-      const { meetingId } = req.body;
-      const meetingUsers = await MeetingUser.find({ meetingId: meetingId })
-      return res.status(200).json(meetingUsers);
+    const { meetingId } = req.body;
+    const meetingUsers = await MeetingUser.find({ meetingId: meetingId })
+    return res.status(200).json(meetingUsers);
   } catch (error) {
-      return res.status(500).json({ message: 'Error fetching users' });
+    return res.status(500).json({ message: 'Error fetching users' });
   }
 }
 const getUserMeetings = async (req, res) => {
@@ -22,6 +22,24 @@ const getUserMeetings = async (req, res) => {
     return res.status(500).json({ message: 'Error fetching meetings' })
   }
 
+}
+const getUserRoles = async (req, res) => {
+  const { userId, meetingId } = req.body;
+  console.log(userId, meetingId);
+
+  try {
+    const meetingUser = await MeetingUser.findOne({userId:userId, meetingId:meetingId});
+
+    if (!meetingUser) {
+      return res.status(404).json({ message: 'Roles not found for the given userId and meetingId' });
+    }
+
+    // Devolver los roles encontrados
+    res.status(200).json({ roles: meetingUser.roles });
+  } catch (error) {
+    console.error('Error fetching user roles:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 }
 
 const getMeetingUserById = async (req, res) => {
@@ -49,7 +67,7 @@ const createMeetingUser = async (meetingId, userId, roles) => {
 
 const deleteMeetingUser = async (meetingId, userId) => {
   try {
-    const meetingUser = await MeetingUser.findOneAndDelete({ userId: userId, meetingId : meetingId})
+    const meetingUser = await MeetingUser.findOneAndDelete({ userId: userId, meetingId: meetingId })
     console.log(meetingUser)
     if (meetingUser.length === 0) {
       return { message: 'Meeting user not found' }
@@ -74,4 +92,4 @@ const updateMeetingUser = async (req, res) => {
   }
 }
 
-module.exports = { getMeetingUsers, getUserMeetings, getMeetingUserById, createMeetingUser, deleteMeetingUser, updateMeetingUser }
+module.exports = { getMeetingUsers, getUserMeetings, getMeetingUserById, getUserRoles, createMeetingUser, deleteMeetingUser, updateMeetingUser }

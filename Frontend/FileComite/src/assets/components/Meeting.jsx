@@ -14,8 +14,10 @@ export const Meeting = (props) => {
     const navigate = useNavigate();
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
     const [renderOption, setRenderOption] = useState('');
+    const [userRoles, setUserRoles] = useState([])
     const location = useLocation();
-    const meetingId = location.state;
+    const {meetingId} = location.state;
+    const {meetingRoles} = location.state
     const { token } = useContext(AuthContext);
 
     const [userMeeting, setUserMeeting] = useState();
@@ -23,6 +25,9 @@ export const Meeting = (props) => {
     const [usersMeeting, setUsersMeeting] = useState([]);
     const [showAddUserMeeting, setShowAddUserMeeting] = useState(false); // Estado para controlar la visualización de AddUserMeeting
 
+    const { userId } = useContext(AuthContext);
+
+    
     if (!token) {
         navigate('/login');
         alert('Primero inicia sesion');
@@ -38,9 +43,22 @@ export const Meeting = (props) => {
         }
     };
 
+    const getUserRolInMeeting = async () =>{
+
+        try {
+            const response = await axios.post('http://127.0.0.1:3333/meetingUser/userId/roles',{ userId, meetingId })
+            setUserRoles(response.data.roles)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         fetchMeetingData();
+        getUserRolInMeeting();
+
     }, []);
+
 
     const handleShowSelectUserRole = () => {
         setShowSelectUserRole(!showSelectUserRole);
@@ -73,7 +91,7 @@ export const Meeting = (props) => {
     const renderComponent = ({ meetingData }) => {
         switch (renderOption) {
             case 'Role':
-                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId }} />;
+                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId, meetingRoles: meetingRoles, userRoles: userRoles}} />;
             case 'Meeting':
                 return <FileRows data={{ option: 'meeting', meetingName: 'meeting', meetingId: meetingId }} />;
             default:
