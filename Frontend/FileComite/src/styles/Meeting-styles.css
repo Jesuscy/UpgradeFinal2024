@@ -116,3 +116,11 @@
     background-color: rgb(141, 54, 175);
     padding: 3px 80px;
 }
+
+.add-users button{
+    margin: auto;
+    font-size: 22px;
+    border-radius: 10px;
+    background-color: rgb(89, 177, 111);
+    padding: 2px;
+}
