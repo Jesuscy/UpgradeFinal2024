@@ -62,9 +62,9 @@ export const Meeting = (props) => {
     const renderComponent = ({meetingData}) => {
         switch (renderOption) {
             case 'Role':
-                return <FileRows data={{ option: 'role', meetingName: 'meeting' }} />;
+                return <FileRows data={{ option: 'role', meetingName: 'meeting', meetingId: meetingId}} />;
             case 'Meeting':
-                return <FileRows data={{ option: 'meeting', meetingName: 'meeting' }} />;
+                return <FileRows data={{ option: 'meeting', meetingName: 'meeting',meetingId: meetingId }} />;
             default:
                 return (
                     <>

@@ -8,9 +8,9 @@ export const UploadFile = (props) => {
     const fileInputRef = useRef(null)
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
-
-    //ELIMINAR LUEGO
-    const meetingId = '664e1d52aedc946ee7634031'
+    const data = props.data
+    const meetingId = data.meetingId
+    console.log(meetingId)
 
     const toBase64 = (file) =>{
         return new Promise((resolve, reject) => {
