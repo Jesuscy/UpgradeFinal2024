@@ -32,10 +32,10 @@ const LoginPage = () => {
                 setSuccess('Usuario logeado exitosamente.');
                 setError('');
                 const { token } = response.data;
-
+                const userId = response.data.user._id;
                 // Almacena el token en sessionStorage
                 sessionStorage.setItem('token', token);
-                login(token)
+                login(token,userId)
                 // Verificar el token (opcional, dependiendo de la lógica de tu aplicación)
                 verifyToken(token);
 

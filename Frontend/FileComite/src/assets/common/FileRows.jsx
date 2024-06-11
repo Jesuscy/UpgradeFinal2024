@@ -12,19 +12,30 @@ const getFileExtension = (url) => {
     return null;
 }
 
-export const FileRows = () => {
-
+export const FileRows = (props) => {
+const data = props.data
 const [files, setFiles] = useState([])
 const [showUpload, setShowUpload] = useState(false)
-const meetingId = '664e1d52aedc946ee7634031'
+const meetingId = data.meetingId
+const meetingRoles = data.meetingRoles
+const userRoles = data.userRoles
 
+console.log(userRoles)
 
 const getFiles = async () =>{
     try{
-
         const response = await axios.post('http://127.0.0.1:3333/file/files', { meetingId })
-        setFiles(response.data.files)   
 
+   
+        if (meetingRoles) {
+            const allFiles = response.data.files;
+            const filteredFiles = allFiles.filter(file => file.meetingData.rol.includes(userRoles));
+            setFiles(filteredFiles);
+
+        } else {
+
+            setFiles(response.data.files);
+        }
     }catch(error){
 
     } 
@@ -47,7 +58,7 @@ const toogleShowUpload = () => {
             <div className="files-header">
                 MEETING TITLE
             </div>
-            {showUpload && <UploadFile toogleShowUpload={toogleShowUpload}/>}
+            {showUpload && <UploadFile data={{meetingId, roles}} toogleShowUpload={toogleShowUpload}/>}
             <div className="files-container">
                 {files.map((file, index) => (
                     <FileRow

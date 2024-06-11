@@ -4,12 +4,6 @@ const {meetingUserSchema} = require('./meetingUser.model')
     meetingName: {
       type: String,
       require: true,
-      unique: true,
-    },
-    meetingPath: {
-      type: String,
-      require: true,
-      unique: true,
     },
     meetingRoles: [{ type: String }],
     meetingUsers: [meetingUserSchema]

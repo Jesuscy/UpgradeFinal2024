@@ -6,7 +6,6 @@ const UserRow = (props) => {
         try {
             const meetingId = props.meetingData._id            ;
             const userId = props.user.userId._id;
-            console.log('Deleting user from meeting:', meetingId, userId)
             // Realiza una solicitud al servidor para eliminar al usuario
             await axios.post('http://localhost:3333/meeting/delete/user', { meetingId, userId });
             // Llama a la función de manejo de eliminación pasada como prop
@@ -26,7 +25,7 @@ const UserRow = (props) => {
             <div className="col-md-12 col-sm-12 col-xs-12 currentRole">
                 <strong>Role: {props.user.roles.join(', ')}</strong>
             </div>
-            <div className="col-md-6 col-sm-12 col-xs-12 user-specs-button selectRole" onClick={props.onRoleClick}>
+            <div className="col-md-6 col-sm-12 col-xs-12 user-specs-button selectRole" onClick={() => {props.onUserClick(props.user); props.onRoleClick()}}>
                 <strong>Select Role</strong>
             </div>
             <div className="col-md-6 col-sm-12 col-xs-12 user-specs-button delete" onClick={handleDeleteUser}>
