@@ -165,7 +165,7 @@ const RegisterPage = () => {
                                             required
                                         />
                                     </div>
-                                    <button type="submit" className="btn btn-primary w-100">Registrarse</button>
+                                    <button type="submit" style={{ textDecoration: 'none', color: 'black', backgroundColor: '#8D36AF'}} className="btn btn-primary w-100">Registrarse</button>
                                 </form>
                             </div>
                         </div>

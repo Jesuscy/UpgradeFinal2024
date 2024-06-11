@@ -46,7 +46,7 @@ export const Header = () => {
                     {/* Show Logout only if there is a token */}
                     {token && (
                         <div className="col-md-12">
-                            <button onClick={logout} style={{ textDecoration: 'none', color: 'black' }}>
+                            <button onClick={logout} style={{ textDecoration: 'none', color: 'black', backgroundColor: '#9EE489'}}>
                                 <h3>Logout</h3>
                             </button>
                         </div>
