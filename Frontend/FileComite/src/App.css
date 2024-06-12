@@ -11,6 +11,19 @@
   background-color: #3a3a3a;
 }
 
+.video-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+}
+.video-wrapper {
+  border-radius: 10px; 
+  overflow: hidden; 
+  height: 310px;
+}
+
+
 /*HEADER STYLES*/
 .header {
   display: flex;
