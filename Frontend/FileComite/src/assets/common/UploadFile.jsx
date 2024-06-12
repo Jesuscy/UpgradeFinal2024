@@ -4,7 +4,7 @@ import '../../styles/UploadFileStyles.css';
 
 export const UploadFile = (props) => {
 
-    const { toogleShowUpload } = props
+    const { toggleShowUpload } = props
     const fileInputRef = useRef(null)
     //UseState para guardar el archivo seleccionado.
     const [selectedFile, setSelectedFile] = useState(null)
@@ -64,7 +64,7 @@ export const UploadFile = (props) => {
                 } 
             })
             alert('Archivo subido con éxito')
-            toogleShowUpload()
+            toggleShowUpload()
         }catch (error) {
             console.log(error);
         }
@@ -87,7 +87,7 @@ export const UploadFile = (props) => {
                     />
                 </div>
                 <div className="row"><button onClick={handleFileUpload}>Upload</button></div>
-                <div className="row close"><button onClick={toogleShowUpload}>Close</button></div>
+                <div className="row close"><button onClick={toggleShowUpload}>Close</button></div>
             </div>
         </div>
     );

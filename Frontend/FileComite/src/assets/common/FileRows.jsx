@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/FileRowStyles.css';
 import { FileRow } from './FileRow';
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import { UploadFile } from './UploadFile';
-import axios from 'axios';
+import axios, { all } from 'axios';
 
 const getFileExtension = (url) => {
     const match = url.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);
@@ -29,11 +28,14 @@ export const FileRows = (props) => {
             const response = await axios.post('http://127.0.0.1:3333/file/files', { meetingId });
 
             if (meetingRoles) {
+                console.log(meetingRoles)
                 const allFiles = response.data.files;
+                console.log(allFiles)
                 const filteredFiles = allFiles.filter(file => {
                     return userRoles.some(role => file.meetingData.rol.includes(role));
                 });
                 setFiles(filteredFiles);
+                console.log(filteredFiles)
             } else {
                 setFiles(response.data.files);
             }
