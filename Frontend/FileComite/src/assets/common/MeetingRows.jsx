@@ -12,7 +12,6 @@ export const MeetingRows = () => {
     const getUserMeetings = async ()=>{
       const response = await axios.post('http://127.0.0.1:3333/meetingUser/userId/meetings', {userId})
       setUserMeetings(response.data)
-      console.log(response)
     }
     
     useEffect(() => {
@@ -26,7 +25,7 @@ export const MeetingRows = () => {
           MEETING TITLE
         </div>
         <div className="meetings-container">
-          {userMeetings.slice(1).map((meeting, index) => ( // Aquí usamos slice(1) para omitir el primer elemento
+          {userMeetings.map((meeting, index) => ( // Aquí usamos slice(1) para omitir el primer elemento
             <MeetingRow
               key={index}
               data={{

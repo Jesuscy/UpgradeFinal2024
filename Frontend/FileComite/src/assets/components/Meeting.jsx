@@ -9,10 +9,12 @@ import { useLocation } from 'react-router-dom';
 import { AuthContext } from './Auth.jsx';
 import axios from "axios";
 import AddUserMeeting from "../common/AddUserMeeting"; // Importa el componente
+import ConfirmDeleteUser from "../common/ConfirmDeleteUser"; // Importa el componente
 
 export const Meeting = (props) => {
     const navigate = useNavigate();
     const [showSelectUserRole, setShowSelectUserRole] = useState(false);
+    const [showDeleteUser, setShowDeleteUser] = useState(false);
     const [renderOption, setRenderOption] = useState('');
     const [userRoles, setUserRoles] = useState([])
     const location = useLocation();
@@ -61,6 +63,10 @@ export const Meeting = (props) => {
 
     const handleShowSelectUserRole = () => {
         setShowSelectUserRole(!showSelectUserRole);
+    };
+
+    const handleConfirmDelete = () => {
+        setShowDeleteUser(!showDeleteUser);
     };
 
     const handleHideSelectUserRole = () => {
@@ -140,7 +146,7 @@ export const Meeting = (props) => {
                                     </div>
                                     <div className="user-overflow">
                                         <div className="col-md-12 col-sm-12 col-xs-12 user-rows">
-                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onUserClick={handleUserClick} onRoleClick={handleShowSelectUserRole} updateUsersState={setUsersMeeting} />
+                                            <UserRows users={usersMeeting} meetingData={meeting.meeting} onUserClick={handleUserClick} onRoleClick={handleShowSelectUserRole} confirmDeleteUser={handleConfirmDelete} />
                                         </div>
                                     </div>
                                 </div>
@@ -157,6 +163,7 @@ export const Meeting = (props) => {
             }
             {showSelectUserRole && <SelectUserRole user={userMeeting} onClose={handleHideSelectUserRole} roles={meeting.meeting.meetingRoles} setMeeting={setMeeting} setUsersMeeting={setUsersMeeting} />}
             {showAddUserMeeting && <AddUserMeeting data={{meetingId,userId}} setUsersMeeting={setUsersMeeting} onClose={handleCloseAddUserMeeting} />} {/* Renderiza el componente AddUserMeeting si showAddUserMeeting es verdadero */}
+            {showDeleteUser && <ConfirmDeleteUser onClose={handleConfirmDelete} meeting={meeting} user={userMeeting} setUsersMeeting={setUsersMeeting}/>} {/* Renderiza el componente AddUserMeeting si showAddUserMeeting es verdadero */}
         </>
     );
 };

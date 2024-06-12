@@ -183,9 +183,7 @@ try {
     }
 } */
     const addUserMeeting = async (req, res, next) => {
-        const { meetingId, userId, roles } = req.body;
-        console.log("Request Body:", req.body);
-    
+        const { meetingId, userId, roles } = req.body;    
         try {
             const meetingToMod = await Meeting.findById(meetingId);
             if (!meetingToMod) {
@@ -200,6 +198,7 @@ try {
             }
     
             const newMeetingUserOrError = await createMeetingUser(meetingId, userId, roles);
+
             if (typeof newMeetingUserOrError === 'string') {
                 console.log("Error creating meeting user:", newMeetingUserOrError);
                 return res.status(500).json({ message: newMeetingUserOrError });
@@ -302,6 +301,7 @@ const delRoleFromMeetingUser = async (req, res) => {
         if (user) {
             user.roles = user.roles.filter(role => role !== rol)
             await meeting.save()
+            await MeetingUser.findOneAndUpdate({ userId, meetingId }, { $pull: { roles: rol }, new: true })
             return res.status(200).json({ message: 'Role successfully deleted.' })
         } else {
             return res.status(404).json({ message: 'User not found in meeting' })

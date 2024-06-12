@@ -11,7 +11,7 @@ const AddUserMeeting = (props) => {
 
     const getAppUsers = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:3333/user/users');
+            const response = await axios.get('http://localhost:3333/user/users');
             const users = response.data.users;
             setAppUsers(users);
         } catch (error) {
@@ -21,9 +21,9 @@ const AddUserMeeting = (props) => {
 
     const addUserToMeeting = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:3333/meeting/add/user', { meetingId, userId: selectedUserId, roles });
-            const meetingToMod = response.data.meetingToMod
-            await setUsersMeeting(meetingToMod.meetingUsers)
+            await axios.post('http://localhost:3333/meeting/add/user', { meetingId, userId: selectedUserId, roles });
+            const { data: meeting } = await axios.post('http://localhost:3333/meeting/meetingId/users', { meetingId });
+            setUsersMeeting(meeting.meetingUsers)
             onClose(); // Cierra el modal después de añadir el usuario
         } catch (error) {
             console.error('Error adding user to meeting:', error);

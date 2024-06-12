@@ -11,8 +11,8 @@ const UserRows = (props) => {
                 user={user}
                 meetingData={props.meetingData}
                 onRoleClick={props.onRoleClick}
-                onDeleteUser={props.updateUsersState}
                 onUserClick = {props.onUserClick}
+                confirmDeleteUser={props.confirmDeleteUser}
             />
         ))}
         </div>
