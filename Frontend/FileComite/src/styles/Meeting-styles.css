@@ -1,6 +1,6 @@
-.meeting-container {
+  .meeting-container {
     height: 100vh;
-    margin-top: 2vh;
+    margin: 2vh auto;
     font-family: "Major Mono Display", monospace;
 }
 
@@ -67,7 +67,7 @@
 
 .meeting-box {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column; 
 }
 
 @media (max-width: 767px){
@@ -161,3 +161,4 @@
     background-color: rgb(89, 177, 111);
     padding: 2px;
 }
+

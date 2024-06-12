@@ -18,7 +18,7 @@ export const Meeting = (props) => {
     const [renderOption, setRenderOption] = useState('');
     const [userRoles, setUserRoles] = useState([])
     const location = useLocation();
-    const {meetingId} = location.state;
+    const { meetingId } = location.state;
     const {meetingRoles} = location.state
     const { token } = useContext(AuthContext);
     const [userMeeting, setUserMeeting] = useState();
@@ -28,6 +28,7 @@ export const Meeting = (props) => {
 
     const { userId } = useContext(AuthContext);
 
+    
     
     if (!token) {
         navigate('/login');
@@ -55,8 +56,11 @@ export const Meeting = (props) => {
     }
 
     useEffect(() => {
+        if (meetingId) {
         fetchMeetingData();
         getUserRolInMeeting();
+
+        }
 
     }, []);
 
