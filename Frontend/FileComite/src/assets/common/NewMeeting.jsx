@@ -81,7 +81,7 @@ export const NewMeeting = () => {
           {currentStepIndex === 2 && (
             <div className='step' id="step2">
               <div><label>Server Description</label></div>
-              <div><input type="password" value={meetingPassword} onChange={(e) => setMeetingPassword(e.target.value)} /></div>
+              <div><input type="text" value={meetingPassword} onChange={(e) => setMeetingPassword(e.target.value)} /></div>
             </div>
           )}
           {currentStepIndex === 3 && (
